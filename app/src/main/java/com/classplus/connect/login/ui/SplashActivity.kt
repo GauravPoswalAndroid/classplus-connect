@@ -1,4 +1,4 @@
-package com.classplus.connect.views
+package com.classplus.connect.login.ui
 
 import android.os.Bundle
 import android.os.Handler
@@ -15,7 +15,7 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
         Handler(Looper.getMainLooper()).postDelayed({
-            WebViewActivity.startActivity(this, DESTINATION_URL)
+            LoginActivity.start(this)
             finish()
         }, 3000)
     }

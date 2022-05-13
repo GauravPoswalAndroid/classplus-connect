@@ -1,4 +1,4 @@
-package com.classplus.connect.views;
+package com.classplus.connect.login.ui;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
