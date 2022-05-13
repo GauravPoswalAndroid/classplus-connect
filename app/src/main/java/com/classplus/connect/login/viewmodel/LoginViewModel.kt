@@ -15,7 +15,7 @@ class LoginViewModel(
     private val listingRepository: LoginDataRepository,
 ) : ViewModel() {
 
-    lateinit var userMobile: String
+    private lateinit var userMobile: String
     lateinit var sessionId: String
     lateinit var otp: String
 
@@ -32,6 +32,7 @@ class LoginViewModel(
         get() = _registerUserResponse
 
     fun getOtpWithMobile(mobileNo: String) = viewModelScope.launch {
+        userMobile = mobileNo
         _getOtpResponse.value = Resource.loading(null)
         try {
             _getOtpResponse.value = Resource.success(listingRepository.getOtpWithMobile(mobileNo))

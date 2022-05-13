@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">Classplus Connect</string>
     <string name="select_file">Select File</string>
+    <string name="done">Done</string>
+    <string name="india_code">91</string>
+    <string name="label_mobile_number_hint">Mobile Number</string>
+    <string name="label_otp_hint">Enter OTP</string>
 </resources>
