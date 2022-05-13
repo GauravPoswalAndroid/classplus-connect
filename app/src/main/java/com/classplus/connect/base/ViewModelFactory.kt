@@ -3,7 +3,6 @@ package com.classplus.connect.base
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.classplus.connect.login.data.repository.LoginDataRepository
-import com.classplus.connect.login.mapper.UserDataMapper
 import com.classplus.connect.login.viewmodel.LoginViewModel
 
 class ViewModelFactory(private val repository: BaseRepository) : ViewModelProvider.NewInstanceFactory(){
@@ -11,8 +10,7 @@ class ViewModelFactory(private val repository: BaseRepository) : ViewModelProvid
         return when {
             modelClass.isAssignableFrom(LoginViewModel::class.java) ->
                 LoginViewModel(
-                    repository as LoginDataRepository,
-                    UserDataMapper()
+                    repository as LoginDataRepository
                 ) as T
 
             else -> throw IllegalArgumentException("ViewModel Class Not Found")

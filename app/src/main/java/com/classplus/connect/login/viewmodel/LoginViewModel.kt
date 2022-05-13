@@ -4,52 +4,87 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.classplus.connect.login.data.model.UserViewItem
+import com.classplus.connect.login.data.model.GetOtpResponse
+import com.classplus.connect.login.data.model.OtpVerifyResponse
 import com.classplus.connect.login.data.repository.LoginDataRepository
-import com.classplus.connect.login.mapper.UserDataMapper
 import com.gauravposwal.testapplication.util.Resource
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
 
 class LoginViewModel(
     private val listingRepository: LoginDataRepository,
-    private val dataMapper: UserDataMapper
 ) : ViewModel() {
 
-    companion object {
-        private const val PAGED_LIST_SIZE = 20
-    }
+    lateinit var userMobile: String
+    lateinit var sessionId: String
+    lateinit var otp: String
 
-    var offset: Int = 0
+    private val _getOtpResponse = MutableLiveData<Resource<GetOtpResponse>>()
+    val getOtpResponse: LiveData<Resource<GetOtpResponse>>
+        get() = _getOtpResponse
 
-    private val _userListingData = MutableLiveData<Resource<List<UserViewItem>>>()
+    private val _verifyOtpResponse = MutableLiveData<Resource<OtpVerifyResponse>>()
+    val verifyOtpResponse: LiveData<Resource<OtpVerifyResponse>>
+        get() = _verifyOtpResponse
 
-    val userListingData: LiveData<Resource<List<UserViewItem>>>
-        get() = _userListingData
+    private val _registerUserResponse = MutableLiveData<Resource<OtpVerifyResponse>>()
+    val registerUserResponse: LiveData<Resource<OtpVerifyResponse>>
+        get() = _registerUserResponse
 
-    fun fetchUsersList() = viewModelScope.launch {
-        _userListingData.value = Resource.loading(null)
+    fun getOtpWithMobile(mobileNo: String) = viewModelScope.launch {
+        _getOtpResponse.value = Resource.loading(null)
         try {
-            _userListingData.value = Resource.success(
-                dataMapper.map(
-                    listingRepository.getUsersList(
-                        offset,
-                        PAGED_LIST_SIZE
-                    )
-                )
-            )
+            _getOtpResponse.value = Resource.success(listingRepository.getOtpWithMobile(mobileNo))
         } catch (throwable: Throwable) {
             when (throwable) {
                 is HttpException -> {
-                    _userListingData.value =
+                    _getOtpResponse.value =
                         Resource.error(null, throwable.message())
                 }
                 else -> {
-                    _userListingData.value = Resource.error(null, "Something went wrong!")
+                    _getOtpResponse.value = Resource.error(null, "Something went wrong!")
 
                 }
             }
         }
     }
 
+    fun verifyOtp(otp: String) = viewModelScope.launch {
+        _verifyOtpResponse.value = Resource.loading(null)
+        try {
+            _verifyOtpResponse.value =
+                Resource.success(listingRepository.verifyOtp(otp, userMobile, sessionId))
+        } catch (throwable: Throwable) {
+            when (throwable) {
+                is HttpException -> {
+                    _verifyOtpResponse.value =
+                        Resource.error(null, throwable.message())
+                }
+                else -> {
+                    _verifyOtpResponse.value = Resource.error(null, "Something went wrong!")
+
+                }
+            }
+        }
+    }
+
+    fun registerUser(name: String, email: String) = viewModelScope.launch {
+        _registerUserResponse.value = Resource.loading(null)
+        try {
+            _registerUserResponse.value = Resource.success(
+                listingRepository.registerUser(otp, userMobile, sessionId, name, email)
+            )
+        } catch (throwable: Throwable) {
+            when (throwable) {
+                is HttpException -> {
+                    _registerUserResponse.value =
+                        Resource.error(null, throwable.message())
+                }
+                else -> {
+                    _registerUserResponse.value = Resource.error(null, "Something went wrong!")
+
+                }
+            }
+        }
+    }
 }

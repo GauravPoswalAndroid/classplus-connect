@@ -9,7 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.classplus.connect.R
 import com.classplus.connect.base.ViewModelFactory
 import com.classplus.connect.login.data.api.LoginApiService
-import com.classplus.connect.login.data.model.UserViewItem
+import com.classplus.connect.login.data.model.GetOtpResponse
 import com.classplus.connect.login.data.repository.LoginDataRepository
 import com.classplus.connect.login.viewmodel.LoginViewModel
 import com.classplus.connect.network.RetrofitBuilder
@@ -36,11 +36,21 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
         initProperties()
         setUpObservers()
-        getUsersListing()
+        getOtpForMobile("8533908250")
+        verifyOtp("2188")
+        registerUser("abc@classplus.co", "Gaurav Poswal")
+    }
+
+    private fun registerUser(email: String, name: String) {
+        viewModel.registerUser(name, email)
+    }
+
+    private fun verifyOtp(otp: String) {
+        viewModel.verifyOtp(otp)
     }
 
     private fun setUpObservers() {
-        viewModel.userListingData.observe(this) {
+        viewModel.getOtpResponse.observe(this) {
             it?.let { resource ->
                 when (resource.status) {
                     Status.SUCCESS -> {
@@ -58,9 +68,47 @@ class LoginActivity : AppCompatActivity() {
                 }
             }
         }
+
+        viewModel.verifyOtpResponse.observe(this) {
+            it?.let { resource ->
+                when (resource.status) {
+                    Status.SUCCESS -> {
+                        progressBar.hide()
+                        Toast.makeText(this, "Api hit Successfully", Toast.LENGTH_SHORT).show()
+                    }
+                    Status.ERROR -> {
+                        progressBar.hide()
+                        Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
+                    }
+                    Status.LOADING -> {
+                        progressBar.show()
+
+                    }
+                }
+            }
+        }
+
+        viewModel.registerUserResponse.observe(this) {
+            it?.let { resource ->
+                when (resource.status) {
+                    Status.SUCCESS -> {
+                        progressBar.hide()
+                        Toast.makeText(this, "Api hit Successfully", Toast.LENGTH_SHORT).show()
+                    }
+                    Status.ERROR -> {
+                        progressBar.hide()
+                        Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
+                    }
+                    Status.LOADING -> {
+                        progressBar.show()
+
+                    }
+                }
+            }
+        }
     }
 
-    private fun handleSuccess(data: List<UserViewItem>?) {
+    private fun handleSuccess(data: GetOtpResponse?) {
         data?.let {
             Toast.makeText(this, "Api hit Successfully", Toast.LENGTH_SHORT).show()
         }
@@ -72,7 +120,7 @@ class LoginActivity : AppCompatActivity() {
         viewModel = ViewModelProvider(this, factory)[LoginViewModel::class.java]
     }
 
-    private fun getUsersListing() {
-        viewModel.fetchUsersList()
+    private fun getOtpForMobile(mobileNo: String) {
+        viewModel.getOtpWithMobile(mobileNo)
     }
 }
