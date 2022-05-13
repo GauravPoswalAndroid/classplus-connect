@@ -13,15 +13,19 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ClassplusConnect">
         <activity
-            android:name="com.classplus.connect.login.ui.SplashActivity"
+            android:name=".login.ui.SignUpActivity"
+            android:exported="false" />
+        <activity
+            android:name=".login.ui.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.classplus.connect.login.ui.WebViewActivity" />
-        <activity android:name="com.classplus.connect.login.ui.LoginActivity" />
+        <activity android:name=".login.ui.WebViewActivity" />
+        <activity android:name=".login.ui.LoginActivity" />
     </application>
 
 </manifest>

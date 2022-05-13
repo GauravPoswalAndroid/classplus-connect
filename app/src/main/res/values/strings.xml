@@ -5,4 +5,11 @@
     <string name="india_code">91</string>
     <string name="label_mobile_number_hint">Mobile Number</string>
     <string name="label_otp_hint">Enter OTP</string>
+    <string name="may_we_know_you">May we know your details before you continue?</string>
+    <string name="enter_details">Please enter the following details that we will use to address you everywhere inside the app.</string>
+    <string name="user_name_characters">abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ 1234567890</string>
+    <string name="name_hint">Enter Your Name</string>
+    <string name="email_hint">Enter Your Email Address</string>
+    <string name="let_s_get_started">Let’s get started</string>
+    <string name="you_are_logging_in_using">You are logging in using &lt;b>%s&lt;/b></string>
 </resources>

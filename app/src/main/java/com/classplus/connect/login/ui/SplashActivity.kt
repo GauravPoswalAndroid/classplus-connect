@@ -7,9 +7,6 @@ import androidx.appcompat.app.AppCompatActivity
 import com.classplus.connect.R
 
 class SplashActivity : AppCompatActivity() {
-    companion object {
-        const val DESTINATION_URL = "https://web.classplusapp.com/"
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
