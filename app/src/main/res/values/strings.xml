@@ -12,4 +12,17 @@
     <string name="email_hint">Enter Your Email Address</string>
     <string name="let_s_get_started">Let’s get started</string>
     <string name="you_are_logging_in_using">You are logging in using &lt;b>%s&lt;/b></string>
+    <string name="wrong_otp">Wrong OTP</string>
+    <string name="str_terms_and_conditions_new">By continuing, you agree to the <annotation click="">Terms &amp; Conditions</annotation></string>
+    <string name="enter_your_mobile_number">Enter your mobile number</string>
+    <string name="login_or_signup">Login</string>
+    <string name="proceed_securely">Proceed securely</string>
+    <string name="email_id_hint">Email ID</string>
+    <string name="verify_your_mobile_number">Verify your mobile number</string><string name="please_enter_the_4_digit_verification_code_sent_to_you_at_91">Please enter the 4-digit verification code sent to you at &lt;b>%s&lt;/b</string>
+    <string name="enter_otp_here">Enter OTP here</string>
+    <string name="resend_code_in">Resend code in %1$s seconds</string>
+    <string name="retry_via_call">Retry via call</string>
+
+    <string name="send_otp_again">Send OTP again</string>
+
 </resources>
