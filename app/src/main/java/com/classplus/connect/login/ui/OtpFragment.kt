@@ -21,10 +21,11 @@ class OtpFragment : Fragment() {
 
     lateinit var viewModel: LoginViewModel
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View {
-        val view = inflater.inflate(R.layout.fragment_otp, null, false)
-        return view
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        return inflater.inflate(R.layout.fragment_otp, null, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -35,6 +36,9 @@ class OtpFragment : Fragment() {
     private fun setObservers() {
         ll_verify_otp.setOnClickListener {
             viewModel.verifyOtp(et_enter_otp.text.toString())
+        }
+        iv_back.setOnClickListener {
+            viewModel.updatePagerNavToPage.value = 0
         }
 
         viewModel.verifyOtpResponse.observe(viewLifecycleOwner) {

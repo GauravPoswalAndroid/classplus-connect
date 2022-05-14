@@ -78,6 +78,7 @@
                 android:layout_gravity="center"
                 android:layout_marginStart="10dp"
                 android:background="@null"
+                android:maxLength="10"
                 android:gravity="center|start"
                 android:hint="@string/label_mobile_number_hint"
                 android:inputType="number"
