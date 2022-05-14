@@ -3,6 +3,8 @@ package com.classplus.connect.login.ui
 import android.graphics.Color
 import android.os.Bundle
 import android.text.method.LinkMovementMethod
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,7 +16,6 @@ import com.classplus.connect.R
 import com.classplus.connect.base.ViewModelFactory
 import com.classplus.connect.login.data.api.LoginApiService
 import com.classplus.connect.login.data.model.GetOtpResponse
-import com.classplus.connect.login.data.model.OtpVerifyData
 import com.classplus.connect.login.data.repository.LoginDataRepository
 import com.classplus.connect.login.viewmodel.LoginViewModel
 import com.classplus.connect.network.RetrofitBuilder
@@ -51,6 +52,20 @@ class LoginSignupFragment : Fragment() {
     }
 
     private fun clickListeners() {
+        ll_proceed.enableDisableButton(false)
+        et_mobile.addTextChangedListener(object: TextWatcher{
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                ll_proceed.enableDisableButton(s.toString().length >= 10)
+            }
+
+        })
         ll_proceed.setOnClickListener {
             verifyNumberOrEmail()
         }
@@ -82,7 +97,7 @@ class LoginSignupFragment : Fragment() {
                     }
                     Status.ERROR -> {
                         ll_proceed.progress_bar.hide()
-                        Toast.makeText(context, it.data?.message ?: "Some Error Ocurred!", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context, it.message ?: "Some Error Occurred!", Toast.LENGTH_SHORT).show()
                     }
                     Status.LOADING -> {
                         ll_proceed.progress_bar.show()

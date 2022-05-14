@@ -14,14 +14,14 @@
     <string name="you_are_logging_in_using">You are logging in using &lt;b>%s&lt;/b></string>
     <string name="wrong_otp">Wrong OTP</string>
     <string name="str_terms_and_conditions_new">By continuing, you agree to the <u><font color='#2278FF'><annotation click="">Terms &amp; Conditions</annotation></font></u></string>
-    <string name="enter_your_mobile_number">Enter your mobile number</string>
+    <string name="enter_your_mobile_number">Please Enter your mobile number</string>
     <string name="login_or_signup">Login or Signup</string>
     <string name="proceed_securely">Proceed Securely</string>
     <string name="verify_otp">Verify OTP</string>
     <string name="email_id_hint">Email ID</string>
     <string name="verify_your_mobile_number">Verify your mobile number</string><string name="please_enter_the_4_digit_verification_code_sent_to_you_at_91">Please enter the 4-digit verification code sent to you at &lt;b>%s&lt;/b</string>
     <string name="enter_otp_here">Enter OTP here</string>
-    <string name="resend_code_in">Resend code in %1$s seconds</string>
+    <string name="resend_code_in">Send OTP again</string>
     <string name="retry_via_call">Retry via call</string>
 
     <string name="send_otp_again">Send OTP again</string>

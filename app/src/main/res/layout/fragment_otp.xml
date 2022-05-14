@@ -68,12 +68,13 @@
             app:layout_constraintBottom_toTopOf="@+id/tv_resend_cta" />
 
         <TextView
-            android:id="@+id/tv_error_info"
+            android:id="@+id/tv_otp_error"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:textColor="@color/faculty_text"
             android:textSize="14sp"
+            tools:text="*Invalid OTP"
             android:visibility="gone"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/et_enter_otp" />
@@ -97,9 +98,9 @@
             android:layout_marginTop="20dp"
             android:layout_marginBottom="24dp"
             android:text="@string/send_otp_again"
-            android:textColor="@color/accent_color"
+            android:textColor="@color/purple_500"
             android:textSize="14sp"
-            android:visibility="gone"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/et_enter_otp" />
 
@@ -129,7 +130,7 @@
             app:layout_constraintTop_toBottomOf="@+id/et_enter_otp" />
 
         <com.classplus.connect.login.ui.LoadingButtonVerifyOtp
-            android:id="@+id/ll_verify_otp"
+            android:id="@+id/verify_otp"
             android:layout_width="match_parent"
             android:layout_height="52dp"
             android:layout_marginTop="60dp"

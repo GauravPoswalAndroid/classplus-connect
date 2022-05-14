@@ -3,6 +3,8 @@ package com.classplus.connect.login.ui
 import android.os.Build
 import android.os.Bundle
 import android.text.Html
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,6 +20,7 @@ import com.classplus.connect.util.Status
 import com.classplus.connect.util.hide
 import com.classplus.connect.util.show
 import kotlinx.android.synthetic.main.activity_signup.*
+import kotlinx.android.synthetic.main.fragment_login_signup.*
 import kotlinx.android.synthetic.main.fragment_otp.*
 import kotlinx.android.synthetic.main.loading_button.view.*
 
@@ -35,21 +38,46 @@ class OtpFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(requireActivity())[LoginViewModel::class.java]
+        verify_otp.enableDisableButton(false)
         setObservers()
     }
     private fun setObservers() {
-        ll_verify_otp.setOnClickListener {
+        verify_otp.setOnClickListener {
             viewModel.verifyOtp(et_enter_otp.text.toString())
         }
         iv_back_btn.setOnClickListener {
+        et_enter_otp.addTextChangedListener(object: TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                verify_otp.enableDisableButton(s.toString().length >= 4)
+            }
+
+        })
+        iv_back.setOnClickListener {
             viewModel.updatePagerNavToPage.value = 0
         }
+        tv_send_again.setOnClickListener {
+            viewModel.getOtpWithMobile(viewModel.userMobile)
+        }
 
+
+
+        viewModel.isInvalidOtp.observe(viewLifecycleOwner) {
+            tv_send_again.visibility = View.GONE
+            tv_otp_error.visibility = View.VISIBLE
+            tv_otp_error.text = "*Invalid OTP. Please check and try again."
+        }
         viewModel.verifyOtpResponse.observe(viewLifecycleOwner) {
             it?.let { resource ->
                 when (resource.status) {
                     Status.SUCCESS -> {
-                        ll_verify_otp.progress_bar.hide()
+                        verify_otp.progress_bar.hide()
                         if(resource.data?.data?.exists == 1){
                             SharedPreferenceHelper.saveToken(requireContext(), resource.data.data.token)
                             SharedPreferenceHelper.saveLandingUrl(requireContext(), resource.data.data.landingUrl)
@@ -67,11 +95,11 @@ class OtpFragment : Fragment() {
 
                     }
                     Status.ERROR -> {
-                        ll_verify_otp.progress_bar.hide()
+                        verify_otp.progress_bar.hide()
                         Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
                     }
                     Status.LOADING -> {
-                        ll_verify_otp.progress_bar.show()
+                        verify_otp.progress_bar.show()
 
                     }
                 }

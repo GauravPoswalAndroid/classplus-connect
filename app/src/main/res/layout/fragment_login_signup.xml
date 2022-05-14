@@ -102,15 +102,15 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/ll_enter_no" />
 
-        ˘<com.classplus.connect.login.ui.LoadingButtonGetOtp
-        android:id="@+id/ll_proceed"
-        android:layout_width="match_parent"
-        android:layout_height="52dp"
-        android:layout_marginTop="32dp"
-        android:gravity="center"
-        android:orientation="horizontal"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ll_enter_no" />
+        <com.classplus.connect.login.ui.LoadingButtonGetOtp
+            android:id="@+id/ll_proceed"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginTop="32dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ll_enter_no" />
 
         <View
             android:id="@+id/line_3"
