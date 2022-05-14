@@ -17,8 +17,6 @@ import com.classplus.connect.util.Status
 import com.classplus.connect.util.hide
 import com.classplus.connect.util.show
 import kotlinx.android.synthetic.main.activity_signup.*
-import kotlinx.android.synthetic.main.app_progress_bar.*
-
 class SignUpActivity : AppCompatActivity() {
     private lateinit var viewModel: SignUpViewModel
 
@@ -66,7 +64,7 @@ class SignUpActivity : AppCompatActivity() {
                 viewModel.name = etName.text.toString()
 
                 if (etEmail.text.toString().isNotEmpty()) {
-                    viewModel.name = etName.text.toString()
+                    viewModel.email = etEmail.text.toString()
                     viewModel.registerUser()
                 } else {
                     Toast.makeText(this, "Please Enter Email ", Toast.LENGTH_SHORT).show()
@@ -81,7 +79,6 @@ class SignUpActivity : AppCompatActivity() {
                     Status.SUCCESS -> {
                         progressBar.hide()
                         resource.data?.data?.let { data ->
-                            Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
                             WebViewActivity.startActivity(this, getFormattedUrl(data))
                         }
                     }
@@ -98,6 +95,6 @@ class SignUpActivity : AppCompatActivity() {
         }
     }
 
-    private fun getFormattedUrl(data: OtpVerifyData) = "${data?.landingUrl}?token=${data?.token}"
+    private fun getFormattedUrl(data: OtpVerifyData) = "${data.landingUrl}?token=${data.token}"
 
 }

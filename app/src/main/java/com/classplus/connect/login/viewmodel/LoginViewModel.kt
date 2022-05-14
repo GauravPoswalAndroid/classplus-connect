@@ -53,6 +53,7 @@ class LoginViewModel(
     fun verifyOtp(otp: String) = viewModelScope.launch {
         _verifyOtpResponse.value = Resource.loading(null)
         try {
+            this@LoginViewModel.otp = otp
             _verifyOtpResponse.value =
                 Resource.success(listingRepository.verifyOtp(otp, userMobile, sessionId))
         } catch (throwable: Throwable) {

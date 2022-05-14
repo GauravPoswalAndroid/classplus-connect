@@ -62,6 +62,7 @@ class LoginDataRepository(private val loginApiService: LoginApiService) : BaseRe
         addProperty("name", name)
         addProperty("sessionId", sessionId)
         addProperty("otp", otp)
+        addProperty("telegramUsername", "rajatsachdeva1997")
         add("contact", JsonObject().apply {
             addProperty("email", email)
             addProperty("mobile", mobile)

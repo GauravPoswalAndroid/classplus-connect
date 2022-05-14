@@ -15,7 +15,7 @@ class ViewModelFactory(private val repository: BaseRepository) : ViewModelProvid
                 ) as T
 
             modelClass.isAssignableFrom(SignUpViewModel::class.java) ->
-                LoginViewModel(
+                SignUpViewModel(
                     repository as LoginDataRepository
                 ) as T
 
