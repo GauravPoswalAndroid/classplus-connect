@@ -13,7 +13,6 @@
     <string name="telegram_hint">Enter Your Telegram username</string>
     <string name="let_s_get_started">Let’s get started</string>
     <string name="you_are_logging_in_using">You are logging in using &lt;b>%s&lt;/b></string>
-    <string name="verify_otp">Verify OTP</string>
     <string name="wrong_otp">Wrong OTP</string>
     <string name="str_terms_and_conditions_new">By continuing, you agree to the <annotation click="">Terms &amp; Conditions</annotation></string>
     <string name="enter_your_mobile_number">Enter your mobile number</string>

@@ -10,11 +10,9 @@ import androidx.lifecycle.ViewModelProvider
 import com.classplus.connect.R
 import com.classplus.connect.login.data.model.OtpVerifyData
 import com.classplus.connect.login.viewmodel.LoginViewModel
-import com.gauravposwal.testapplication.util.Status
-import com.gauravposwal.testapplication.util.hide
-import com.gauravposwal.testapplication.util.show
-import kotlinx.android.synthetic.main.app_progress_bar.*
-import kotlinx.android.synthetic.main.fragment_login_signup.*
+import com.classplus.connect.util.Status
+import com.classplus.connect.util.hide
+import com.classplus.connect.util.show
 import kotlinx.android.synthetic.main.fragment_otp.*
 import kotlinx.android.synthetic.main.loading_button.view.*
 
@@ -47,12 +45,12 @@ class OtpFragment : Fragment() {
                             WebViewActivity.startActivity(requireActivity(), getFormattedUrl(resource.data.data))
                         }
                         else {
-//                            SignUpActivity.start(
-//                                this,
-//                                viewModel.userMobile,
-//                                viewModel.otp,
-//                                viewModel.sessionId
-//                            )
+                            SignUpActivity.start(
+                                requireContext(),
+                                viewModel.userMobile,
+                                viewModel.otp,
+                                viewModel.sessionId
+                            )
                         }
 
                     }
@@ -69,20 +67,12 @@ class OtpFragment : Fragment() {
         }
     }
 
-    private fun getFormattedUrl(data: OtpVerifyData?) = "${data?.landingUrl}?token=${data?.token}"
+    private fun getFormattedUrl(data: OtpVerifyData?) = "${data?.landingUrl}${data?.token}"
 
     companion object {
-        /**
-         * These two values are used to handle the back navigation from registration screen.
-         * It was a use case by Design team, that previous screen should be filled with data if navigate back.
-         * But the same flow was being used for Signin with prefilled number/email. These two seperate the flows.
-         */
-        const val NORMAl_NAVIGATION_FLOW = 100
-        const val BACK_NAVIGATION_FLOW = 101
 
         fun newInstance(): OtpFragment {
-            val fragment = OtpFragment()
-            return fragment
+            return OtpFragment()
         }
 
     }

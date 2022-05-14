@@ -20,7 +20,7 @@ class LoginViewModel(
     lateinit var otp: String
 
 
-    val _isOtpRequestSent = MutableLiveData<Boolean>()
+    val updatePagerNavToPage = MutableLiveData<Int>()
 
     private val _getOtpResponse = MutableLiveData<Resource<GetOtpResponse>>()
     val getOtpResponse: LiveData<Resource<GetOtpResponse>>
