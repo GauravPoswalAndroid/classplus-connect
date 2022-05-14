@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="24dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/frame1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="22dp"
+        android:paddingTop="56dp"
+        android:paddingRight="22dp">
+
+        <TextView
+            android:id="@+id/tv_login_heading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:text="@string/verify_your_mobile_number"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/tv_enter_number_email"
+            app:layout_constraintLeft_toLeftOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_enter_number_email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:lineSpacingExtra="5sp"
+            android:text="@string/please_enter_the_4_digit_verification_code_sent_to_you_at_91"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toTopOf="@+id/et_enter_otp"
+            app:layout_constraintLeft_toLeftOf="parent" />
+
+        <EditText
+            android:id="@+id/et_enter_otp"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@drawable/shape_rectangle_filled_white_outline_gray_r6"
+            android:focusableInTouchMode="true"
+            android:gravity="center|start"
+            android:hint="@string/enter_otp_here"
+            android:imeOptions="actionDone"
+            android:inputType="number"
+            android:maxLength="4"
+            android:padding="10dp"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/tv_resend_cta" />
+
+        <TextView
+            android:id="@+id/tv_error_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/faculty_text"
+            android:textSize="14sp"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/et_enter_otp" />
+
+        <TextView
+            android:id="@+id/tv_resend_cta"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:text="@string/resend_code_in"
+            android:textColor="@color/color_666666"
+            android:textSize="14sp"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/et_enter_otp" />
+
+        <TextView
+            android:id="@+id/tv_send_again"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="24dp"
+            android:text="@string/send_otp_again"
+            android:textColor="@color/accent_color"
+            android:textSize="14sp"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/et_enter_otp" />
+
+        <ImageView
+            android:id="@+id/iv_or_Sign"
+            android:layout_width="2dp"
+            android:layout_height="25dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:visibility="gone"
+            app:layout_constraintStart_toEndOf="@+id/tv_send_again"
+            app:layout_constraintTop_toBottomOf="@+id/et_enter_otp"
+            app:srcCompat="@drawable/ic_or_sign" />
+
+        <TextView
+            android:id="@+id/tv_retry_via_call"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="24dp"
+            android:text="@string/retry_via_call"
+            android:textColor="@color/accent_color"
+            android:textSize="14sp"
+            android:visibility="gone"
+            app:layout_constraintStart_toEndOf="@+id/iv_or_Sign"
+            app:layout_constraintTop_toBottomOf="@+id/et_enter_otp" />
+
+        <com.classplus.connect.login.ui.LoadingButton
+            android:id="@+id/ll_verify_otp"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginTop="60dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/et_enter_otp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

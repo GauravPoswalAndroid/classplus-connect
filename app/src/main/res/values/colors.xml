@@ -14,4 +14,10 @@
     <color name="gray_deep_dark">#333333</color>
     <color name="color_FF4058">#FF4058</color>
     <color name="colorPrimary">#2278FF</color>
+    <color name="gray100">#999999</color>
+    <color name="grayE5">#E5E5E5</color>
+    <color name="faculty_text">#FF4058</color>
+    <color name="colorText_Black_Alpha_99">#99000000</color>
+    <color name="accent_color">#009ae0</color>
+    <color name="color_666666">#666666</color>
 </resources>

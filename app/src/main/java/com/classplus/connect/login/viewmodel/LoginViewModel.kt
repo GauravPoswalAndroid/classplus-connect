@@ -19,6 +19,9 @@ class LoginViewModel(
     lateinit var sessionId: String
     lateinit var otp: String
 
+
+    val _isOtpRequestSent = MutableLiveData<Boolean>()
+
     private val _getOtpResponse = MutableLiveData<Resource<GetOtpResponse>>()
     val getOtpResponse: LiveData<Resource<GetOtpResponse>>
         get() = _getOtpResponse
