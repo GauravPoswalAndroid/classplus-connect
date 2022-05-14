@@ -95,6 +95,6 @@ class SignUpActivity : AppCompatActivity() {
         }
     }
 
-    private fun getFormattedUrl(data: OtpVerifyData) = "${data.landingUrl}?token=${data.token}"
+    private fun getFormattedUrl(data: OtpVerifyData) = "${data.landingUrl}${data.token}"
 
 }
