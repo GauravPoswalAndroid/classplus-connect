@@ -14,9 +14,9 @@ import com.classplus.connect.login.data.model.OtpVerifyData
 import com.classplus.connect.login.data.repository.LoginDataRepository
 import com.classplus.connect.login.viewmodel.LoginViewModel
 import com.classplus.connect.network.RetrofitBuilder
-import com.gauravposwal.testapplication.util.Status
-import com.gauravposwal.testapplication.util.hide
-import com.gauravposwal.testapplication.util.show
+import com.classplus.connect.util.Status
+import com.classplus.connect.util.hide
+import com.classplus.connect.util.show
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.app_progress_bar.progressBar
 
@@ -39,12 +39,6 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
         initProperties()
         setUpObservers()
-//        verifyOtp("2188")
-//        registerUser("abc@classplus.co", "Gaurav Poswal")
-    }
-
-    private fun registerUser(email: String, name: String) {
-        viewModel.registerUser(name, email)
     }
 
     private fun verifyOtp(otp: String) {
@@ -95,11 +89,12 @@ class LoginActivity : AppCompatActivity() {
                             WebViewActivity.startActivity(this, getFormattedUrl(resource.data.data))
                         }
                         else {
-                            Toast.makeText(
+                            SignUpActivity.start(
                                 this,
-                                "Registration flow is under dev...",
-                                Toast.LENGTH_SHORT
-                            ).show()
+                                viewModel.userMobile,
+                                viewModel.otp,
+                                viewModel.sessionId
+                            )
                         }
 
                     }
@@ -140,7 +135,7 @@ class LoginActivity : AppCompatActivity() {
     private fun handleSuccess(data: GetOtpResponse?) {
         data?.let {
             viewModel.sessionId = data.data.sessionId
-            llProceed.text = "Verify OTP"
+            llProceed.text = getString(R.string.verify_otp)
             isOtpReceived = true
         }
     }

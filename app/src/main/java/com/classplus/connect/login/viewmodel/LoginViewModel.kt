@@ -7,7 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.classplus.connect.login.data.model.GetOtpResponse
 import com.classplus.connect.login.data.model.OtpVerifyResponse
 import com.classplus.connect.login.data.repository.LoginDataRepository
-import com.gauravposwal.testapplication.util.Resource
+import com.classplus.connect.util.Resource
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
 
@@ -15,7 +15,7 @@ class LoginViewModel(
     private val listingRepository: LoginDataRepository,
 ) : ViewModel() {
 
-    private lateinit var userMobile: String
+    lateinit var userMobile: String
     lateinit var sessionId: String
     lateinit var otp: String
 
@@ -63,26 +63,6 @@ class LoginViewModel(
                 }
                 else -> {
                     _verifyOtpResponse.value = Resource.error(null, "Something went wrong!")
-
-                }
-            }
-        }
-    }
-
-    fun registerUser(name: String, email: String) = viewModelScope.launch {
-        _registerUserResponse.value = Resource.loading(null)
-        try {
-            _registerUserResponse.value = Resource.success(
-                listingRepository.registerUser(otp, userMobile, sessionId, name, email)
-            )
-        } catch (throwable: Throwable) {
-            when (throwable) {
-                is HttpException -> {
-                    _registerUserResponse.value =
-                        Resource.error(null, throwable.message())
-                }
-                else -> {
-                    _registerUserResponse.value = Resource.error(null, "Something went wrong!")
 
                 }
             }
