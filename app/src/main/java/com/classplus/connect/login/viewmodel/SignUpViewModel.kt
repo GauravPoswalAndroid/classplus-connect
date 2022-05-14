@@ -4,9 +4,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.classplus.connect.login.data.model.GetOtpResponse
 import com.classplus.connect.login.data.model.OtpVerifyResponse
 import com.classplus.connect.login.data.repository.LoginDataRepository
 import com.classplus.connect.util.Resource
+import com.google.gson.Gson
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
 
@@ -35,8 +37,8 @@ class SignUpViewModel(
         } catch (throwable: Throwable) {
             when (throwable) {
                 is HttpException -> {
-                    _registerUserResponse.value =
-                        Resource.error(null, throwable.message())
+                    val errorBody = Gson().fromJson(throwable.response()?.errorBody()?.charStream(), GetOtpResponse::class.java)
+                    _registerUserResponse.value = Resource.error(null, errorBody.message)
                 }
                 else -> {
                     _registerUserResponse.value = Resource.error(null, "Something went wrong!")

@@ -5,6 +5,8 @@ import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.text.Html
+import android.text.TextUtils
+import android.util.Patterns
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
@@ -73,10 +75,10 @@ class SignUpActivity : AppCompatActivity() {
             finish()
         }
         btnNext.setOnClickListener {
-            if (etName.text.toString().isNotEmpty()) {
+            if (isValidName(etName.text.toString())) {
                 viewModel.name = etName.text.toString()
 
-                if (etEmail.text.toString().isNotEmpty()) {
+                if (isEmailValid(etEmail.text.toString())) {
                     viewModel.email = etEmail.text.toString()
 
                     if (etTelegram.text.toString().isNotEmpty()) {
@@ -86,10 +88,10 @@ class SignUpActivity : AppCompatActivity() {
                         Toast.makeText(this, "Please enter a valid Telegram Username", Toast.LENGTH_SHORT).show()
                     }
                 } else {
-                    Toast.makeText(this, "Please enter valid Email ID", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Please enter a valid Email ID", Toast.LENGTH_SHORT).show()
                 }
             } else {
-                Toast.makeText(this, "Please Enter Name ", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Please Enter a valid Name ", Toast.LENGTH_SHORT).show()
             }
         }
         viewModel.registerUserResponse.observe(this) {
@@ -115,6 +117,14 @@ class SignUpActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    private fun isValidName(name: String): Boolean {
+        return name.isNotEmpty() && !name.toCharArray()[0].isDigit()
+    }
+
+    private fun isEmailValid(email: String?): Boolean {
+        return !TextUtils.isEmpty(email) && Patterns.EMAIL_ADDRESS.matcher(email).matches()
     }
 
     private fun getFormattedUrl(data: OtpVerifyData) = "${data.landingUrl}${data.token}"

@@ -8,6 +8,7 @@ import com.classplus.connect.login.data.model.GetOtpResponse
 import com.classplus.connect.login.data.model.OtpVerifyResponse
 import com.classplus.connect.login.data.repository.LoginDataRepository
 import com.classplus.connect.util.Resource
+import com.google.gson.Gson
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
 
@@ -21,6 +22,7 @@ class LoginViewModel(
 
 
     val updatePagerNavToPage = MutableLiveData<Int>()
+    val isInvalidOtp = MutableLiveData<Boolean>()
 
     private val _getOtpResponse = MutableLiveData<Resource<GetOtpResponse>>()
     val getOtpResponse: LiveData<Resource<GetOtpResponse>>
@@ -42,8 +44,9 @@ class LoginViewModel(
         } catch (throwable: Throwable) {
             when (throwable) {
                 is HttpException -> {
+                    val errorBody = Gson().fromJson(throwable.response()?.errorBody()?.charStream(), GetOtpResponse::class.java)
                     _getOtpResponse.value =
-                        Resource.error(null, throwable.message())
+                        Resource.error(null, errorBody.message)
                 }
                 else -> {
                     _getOtpResponse.value = Resource.error(null, "Something went wrong!")
@@ -62,8 +65,11 @@ class LoginViewModel(
         } catch (throwable: Throwable) {
             when (throwable) {
                 is HttpException -> {
-                    _verifyOtpResponse.value =
-                        Resource.error(null, throwable.message())
+                    if(throwable.code() == 400){
+                        isInvalidOtp.value = true
+                    }
+                    val errorBody = Gson().fromJson(throwable.response()?.errorBody()?.charStream(), GetOtpResponse::class.java)
+                    _verifyOtpResponse.value = Resource.error(null, errorBody.message)
                 }
                 else -> {
                     _verifyOtpResponse.value = Resource.error(null, "Something went wrong!")
