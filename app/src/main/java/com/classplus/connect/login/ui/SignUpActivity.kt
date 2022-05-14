@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.text.Html
+import android.view.WindowManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
@@ -58,7 +59,7 @@ class SignUpActivity : AppCompatActivity() {
         viewModel.otp = intent.getStringExtra(OTP) ?: ""
         viewModel.sessionId = intent.getStringExtra(SESSION_ID) ?: ""
 
-        val mobileNo = "91-${viewModel.userMobile}"
+        val mobileNo = "+91-${viewModel.userMobile}"
         val credentialColor = "<font color='#000000'>$mobileNo</font>"
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
             tvLoggingMessage.text = Html.fromHtml(getString(R.string.you_are_logging_in_using, credentialColor), Html.FROM_HTML_MODE_LEGACY)

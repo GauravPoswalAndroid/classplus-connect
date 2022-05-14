@@ -78,16 +78,16 @@
                 android:id="@+id/llName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
                 android:background="@drawable/shape_rectangle_filled_white_outline_gray_r6"
                 android:orientation="horizontal"
                 android:paddingLeft="10dp"
                 android:paddingTop="3dp"
                 android:paddingRight="10dp"
                 android:paddingBottom="3dp"
+                android:layout_marginTop="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvSubTitle">
+                app:layout_constraintTop_toBottomOf="@+id/lbl_name">
 
                 <EditText
                     android:id="@+id/etName"
@@ -95,6 +95,7 @@
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
                     android:layout_marginStart="5dp"
+                    android:layout_marginTop="8dp"
                     android:backgroundTint="@android:color/transparent"
                     android:digits="@string/user_name_characters"
                     android:ellipsize="end"
@@ -123,16 +124,16 @@
                 android:id="@+id/llEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
                 android:background="@drawable/shape_rectangle_filled_white_outline_gray_r6"
                 android:orientation="horizontal"
                 android:paddingLeft="10dp"
                 android:paddingTop="3dp"
                 android:paddingRight="10dp"
                 android:paddingBottom="3dp"
+                android:layout_marginTop="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvErrorName">
+                app:layout_constraintTop_toBottomOf="@+id/lbl_email">
 
                 <EditText
                     android:id="@+id/etEmail"
@@ -164,16 +165,16 @@
                 android:id="@+id/llTelegram"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
                 android:background="@drawable/shape_rectangle_filled_white_outline_gray_r6"
                 android:orientation="horizontal"
+                android:layout_marginTop="8dp"
                 android:paddingLeft="10dp"
                 android:paddingTop="3dp"
                 android:paddingRight="10dp"
                 android:paddingBottom="3dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvErrorEmail">
+                app:layout_constraintTop_toBottomOf="@+id/lbl_telegram_username">
 
                 <EditText
                     android:id="@+id/etTelegram"
@@ -232,6 +233,36 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/btnNext" />
+
+            <TextView
+                android:id="@+id/lbl_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/name"
+                android:textColor="#3C4852"
+                app:layout_constraintStart_toStartOf="@+id/llName"
+                app:layout_constraintTop_toBottomOf="@+id/tvSubTitle" />
+
+            <TextView
+                android:id="@+id/lbl_email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/email_address"
+                android:textColor="#3C4852"
+                app:layout_constraintStart_toStartOf="@+id/llEmail"
+                app:layout_constraintTop_toBottomOf="@+id/llName" />
+
+            <TextView
+                android:id="@+id/lbl_telegram_username"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/telegram_username"
+                android:textColor="#3C4852"
+                app:layout_constraintStart_toStartOf="@+id/llTelegram"
+                app:layout_constraintTop_toBottomOf="@+id/llEmail" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

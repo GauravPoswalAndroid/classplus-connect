@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import androidx.viewpager.widget.ViewPager
 import com.classplus.connect.R
 import com.classplus.connect.base.ViewModelFactory
 import com.classplus.connect.login.adapter.ViewPagerAdapter
@@ -43,6 +44,21 @@ class LoginActivity : AppCompatActivity() {
 
         }.also {
             login_viewPager.adapter = it
+            login_viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+                override fun onPageScrolled(
+                    position: Int,
+                    positionOffset: Float,
+                    positionOffsetPixels: Int
+                ) {}
+
+                override fun onPageSelected(position: Int) {
+                    if (position == 1) {
+                        ((login_viewPager.adapter as ViewPagerAdapter).getItem(1) as OtpFragment).setMobileNumber()
+                    }
+                }
+
+                override fun onPageScrollStateChanged(state: Int) {}
+            })
         }
     }
 

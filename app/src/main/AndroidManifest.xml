@@ -25,7 +25,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".login.ui.WebViewActivity" />
-        <activity android:name=".login.ui.LoginActivity" />
+        <activity
+            android:name=".login.ui.LoginActivity"
+            android:windowSoftInputMode="adjustResize"/>
     </application>
 
 </manifest>

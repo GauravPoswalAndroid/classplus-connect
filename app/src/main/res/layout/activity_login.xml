@@ -14,7 +14,7 @@
         android:src="@drawable/clp_banner"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintVertical_bias="0.22"
+        app:layout_constraintVertical_bias="0.15"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="ContentDescription" />
@@ -33,7 +33,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cl_lvl"
         android:layout_width="match_parent"
-        android:layout_height="350dp"
+        android:layout_height="290dp"
         android:background="@drawable/shape_rectangle_filled_white_r10_tr_tl"
         app:layout_constraintBottom_toBottomOf="parent">
 
@@ -41,6 +41,9 @@
             android:id="@+id/login_viewPager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

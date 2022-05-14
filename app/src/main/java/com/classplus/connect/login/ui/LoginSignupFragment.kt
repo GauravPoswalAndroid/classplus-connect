@@ -1,9 +1,12 @@
 package com.classplus.connect.login.ui
 
+import android.graphics.Color
 import android.os.Bundle
+import android.text.method.LinkMovementMethod
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -19,6 +22,8 @@ import com.classplus.connect.util.Status
 import com.classplus.connect.util.hide
 import com.classplus.connect.util.show
 import kotlinx.android.synthetic.main.fragment_login_signup.*
+import kotlinx.android.synthetic.main.fragment_login_signup.tv_enter_number_email
+import kotlinx.android.synthetic.main.fragment_otp.*
 import kotlinx.android.synthetic.main.loading_button.view.*
 
 class LoginSignupFragment : Fragment() {
@@ -30,7 +35,6 @@ class LoginSignupFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val view = inflater.inflate(R.layout.fragment_login_signup, null, false)
-
         initVariables()
         return view
     }
@@ -39,6 +43,7 @@ class LoginSignupFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         clickListeners()
     }
+
     private fun initVariables() {
         val listingApiService = RetrofitBuilder.provideService(LoginApiService::class.java) as LoginApiService
         val factory = ViewModelFactory(LoginDataRepository(listingApiService))
