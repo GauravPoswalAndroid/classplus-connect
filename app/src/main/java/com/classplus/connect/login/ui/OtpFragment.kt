@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.classplus.connect.R
 import com.classplus.connect.login.data.model.OtpVerifyData
 import com.classplus.connect.login.viewmodel.LoginViewModel
+import com.classplus.connect.util.SharedPreferenceHelper
 import com.classplus.connect.util.Status
 import com.classplus.connect.util.hide
 import com.classplus.connect.util.show
@@ -42,7 +43,10 @@ class OtpFragment : Fragment() {
                     Status.SUCCESS -> {
                         ll_verify_otp.progress_bar.hide()
                         if(resource.data?.data?.exists == 1){
+                            SharedPreferenceHelper.saveToken(requireContext(), resource.data.data.token)
+                            SharedPreferenceHelper.saveLandingUrl(requireContext(), resource.data.data.landingUrl)
                             WebViewActivity.startActivity(requireActivity(), getFormattedUrl(resource.data.data))
+                            requireActivity().finish()
                         }
                         else {
                             SignUpActivity.start(

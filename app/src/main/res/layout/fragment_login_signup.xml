@@ -3,15 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="24dp">
+    android:layout_height="wrap_content">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/frame1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingStart="24dp"
-        android:paddingTop="52dp"
+        android:paddingTop="32dp"
+        android:elevation="8dp"
         android:paddingEnd="22dp">
 
         <TextView
@@ -80,6 +80,7 @@
                 android:background="@null"
                 android:gravity="center|start"
                 android:hint="@string/label_mobile_number_hint"
+                android:inputType="number"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 android:textStyle="bold" />
@@ -97,7 +98,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/ll_enter_no" />
 
-        ˘<com.classplus.connect.login.ui.LoadingButton
+        ˘<com.classplus.connect.login.ui.LoadingButtonGetOtp
             android:id="@+id/ll_proceed"
             android:layout_width="match_parent"
             android:layout_height="52dp"

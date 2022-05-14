@@ -2,8 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="24dp">
+    android:layout_height="wrap_content">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/frame1"
@@ -114,7 +113,7 @@
             app:layout_constraintStart_toEndOf="@+id/iv_or_Sign"
             app:layout_constraintTop_toBottomOf="@+id/et_enter_otp" />
 
-        <com.classplus.connect.login.ui.LoadingButton
+        <com.classplus.connect.login.ui.LoadingButtonVerifyOtp
             android:id="@+id/ll_verify_otp"
             android:layout_width="match_parent"
             android:layout_height="52dp"

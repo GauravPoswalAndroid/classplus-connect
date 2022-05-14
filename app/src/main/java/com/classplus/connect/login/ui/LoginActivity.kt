@@ -20,7 +20,7 @@ class LoginActivity : AppCompatActivity() {
 
     companion object {
         private const val TAG = "LoginActivity"
-        fun start(context: Context) {
+        fun startActivity(context: Context) {
             Intent(context, LoginActivity::class.java).apply {}
                 .also {
                     context.startActivity(it)

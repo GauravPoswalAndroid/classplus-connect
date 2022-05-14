@@ -15,6 +15,7 @@ import com.classplus.connect.login.data.model.OtpVerifyData
 import com.classplus.connect.login.data.repository.LoginDataRepository
 import com.classplus.connect.login.viewmodel.SignUpViewModel
 import com.classplus.connect.network.RetrofitBuilder
+import com.classplus.connect.util.SharedPreferenceHelper
 import com.classplus.connect.util.Status
 import com.classplus.connect.util.hide
 import com.classplus.connect.util.show
@@ -97,7 +98,10 @@ class SignUpActivity : AppCompatActivity() {
                     Status.SUCCESS -> {
                         progressBar.hide()
                         resource.data?.data?.let { data ->
+                            SharedPreferenceHelper.saveToken(this, data.token)
+                            SharedPreferenceHelper.saveLandingUrl(this, data.landingUrl)
                             WebViewActivity.startActivity(this, getFormattedUrl(data))
+                            finishAffinity()
                         }
                     }
                     Status.ERROR -> {

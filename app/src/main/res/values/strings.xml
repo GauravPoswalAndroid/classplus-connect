@@ -1,7 +1,6 @@
 <resources>
     <string name="app_name">Classplus Connect</string>
     <string name="select_file">Select File</string>
-    <string name="done">Done</string>
     <string name="india_code">+91</string>
     <string name="label_mobile_number_hint">Mobile Number</string>
     <string name="label_otp_hint">Enter OTP</string>
@@ -17,7 +16,8 @@
     <string name="str_terms_and_conditions_new">By continuing, you agree to the <annotation click="">Terms &amp; Conditions</annotation></string>
     <string name="enter_your_mobile_number">Enter your mobile number</string>
     <string name="login_or_signup">Login</string>
-    <string name="proceed_securely">Proceed securely</string>
+    <string name="proceed_securely">Proceed Securely</string>
+    <string name="verify_otp">Verify OTP</string>
     <string name="email_id_hint">Email ID</string>
     <string name="verify_your_mobile_number">Verify your mobile number</string><string name="please_enter_the_4_digit_verification_code_sent_to_you_at_91">Please enter the 4-digit verification code sent to you at &lt;b>%s&lt;/b</string>
     <string name="enter_otp_here">Enter OTP here</string>

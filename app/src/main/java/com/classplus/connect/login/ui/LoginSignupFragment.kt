@@ -106,8 +106,6 @@ class LoginSignupFragment : Fragment() {
         }
     }
 
-    private fun getFormattedUrl(data: OtpVerifyData?) = "${data?.landingUrl}?token=${data?.token}"
-
     companion object {
         fun newInstance(): LoginSignupFragment {
             return LoginSignupFragment()

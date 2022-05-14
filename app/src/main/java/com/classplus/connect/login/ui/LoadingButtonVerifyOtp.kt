@@ -11,7 +11,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import com.classplus.connect.R
 
-class LoadingButton @JvmOverloads constructor(
+class LoadingButtonVerifyOtp @JvmOverloads constructor(
         context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : ConstraintLayout(context, attrs, defStyleAttr) {
 
@@ -25,7 +25,7 @@ class LoadingButton @JvmOverloads constructor(
             with(resources) {
                 val title = getText(typedArray
                         .getResourceId(R.styleable
-                                .LoadingButton_title, R.string.done))
+                                .LoadingButton_title, R.string.verify_otp))
                 setButtonData(title.toString(), typedArray.getResourceId(R.styleable.LoadingButton_drawableStart, 0))
             }
 
