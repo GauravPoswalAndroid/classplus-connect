@@ -160,6 +160,47 @@
                 app:layout_constraintTop_toBottomOf="@id/llEmail"
                 tools:text="Please enter valid name" />
 
+            <LinearLayout
+                android:id="@+id/llTelegram"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/shape_rectangle_filled_white_outline_gray_r6"
+                android:orientation="horizontal"
+                android:paddingLeft="10dp"
+                android:paddingTop="3dp"
+                android:paddingRight="10dp"
+                android:paddingBottom="3dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvErrorEmail">
+
+                <EditText
+                    android:id="@+id/etTelegram"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="5dp"
+                    android:backgroundTint="@android:color/transparent"
+                    android:ellipsize="end"
+                    android:gravity="center|start"
+                    android:hint="@string/telegram_hint"
+                    android:imeOptions="actionNext"
+                    android:inputType="text"
+                    android:lines="1"
+                    android:textColor="@color/gray_deep_dark"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    tools:ignore="UnusedAttribute" />
+            </LinearLayout>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvErrorTelegram"
+                style="@style/error_text_view"
+                app:layout_constraintStart_toStartOf="@id/llTelegram"
+                app:layout_constraintTop_toBottomOf="@id/llTelegram"
+                tools:text="Please enter valid Telegram username" />
+
             <Button
                 android:id="@+id/btnNext"
                 android:layout_width="match_parent"
@@ -175,7 +216,7 @@
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvErrorEmail"
+                app:layout_constraintTop_toBottomOf="@id/tvErrorTelegram"
                 app:title="@string/let_s_get_started" />
 
             <TextView

@@ -25,7 +25,8 @@ class LoginDataRepository(private val loginApiService: LoginApiService) : BaseRe
         mobile: String,
         sessionId: String,
         name: String,
-        email: String
+        email: String,
+        tgUserName: String
     ) = hitApiCall {
         loginApiService.registerUser(
             getJsonBodyForUserRegistration(
@@ -34,6 +35,7 @@ class LoginDataRepository(private val loginApiService: LoginApiService) : BaseRe
                 otp,
                 mobile,
                 email,
+                tgUserName
             )
         )
     }
@@ -43,13 +45,13 @@ class LoginDataRepository(private val loginApiService: LoginApiService) : BaseRe
         mobile: String,
         sessionId: String
     ) = JsonObject().apply {
-        addProperty("mobile", mobile)
+        addProperty("mobile", "91$mobile")
         addProperty("otp", otp)
         addProperty("sessionId", sessionId)
     }
 
     private fun getJsonBodyForGetOtp(mobileNo: String) = JsonObject().apply {
-        addProperty("mobile", mobileNo)
+        addProperty("mobile", "91$mobileNo")
     }
 
     private fun getJsonBodyForUserRegistration(
@@ -57,15 +59,16 @@ class LoginDataRepository(private val loginApiService: LoginApiService) : BaseRe
         sessionId: String,
         otp: String,
         mobile: String,
-        email: String
+        email: String,
+        tgUserName: String
     ) = JsonObject().apply {
         addProperty("name", name)
         addProperty("sessionId", sessionId)
         addProperty("otp", otp)
-        addProperty("telegramUsername", "rajatsachdeva1997")
+        addProperty("telegramUsername", tgUserName)
         add("contact", JsonObject().apply {
             addProperty("email", email)
-            addProperty("mobile", mobile)
+            addProperty("mobile", "91$mobile")
         })
     }
 }

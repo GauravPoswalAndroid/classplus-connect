@@ -2,7 +2,9 @@ package com.classplus.connect.login.ui
 
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
+import android.text.Html
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
@@ -48,26 +50,42 @@ class SignUpActivity : AppCompatActivity() {
     }
 
     private fun initProperties() {
-        val listingApiService =
-            RetrofitBuilder.provideService(LoginApiService::class.java) as LoginApiService
+        val listingApiService = RetrofitBuilder.provideService(LoginApiService::class.java) as LoginApiService
         val factory = ViewModelFactory(LoginDataRepository(listingApiService))
         viewModel = ViewModelProvider(this, factory)[SignUpViewModel::class.java]
         viewModel.userMobile = intent.getStringExtra(MOBILE) ?: ""
         viewModel.otp = intent.getStringExtra(OTP) ?: ""
         viewModel.sessionId = intent.getStringExtra(SESSION_ID) ?: ""
 
+        val mobileNo = "91-${viewModel.userMobile}"
+        val credentialColor = "<font color='#000000'>$mobileNo</font>"
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
+            tvLoggingMessage.text = Html.fromHtml(getString(R.string.you_are_logging_in_using, credentialColor), Html.FROM_HTML_MODE_LEGACY)
+        else
+            @Suppress("DEPRECATION")
+            tvLoggingMessage.text = Html.fromHtml(getString(R.string.you_are_logging_in_using, credentialColor))
+
     }
 
     private fun setObservers() {
+        iv_back.setOnClickListener{
+            finish()
+        }
         btnNext.setOnClickListener {
             if (etName.text.toString().isNotEmpty()) {
                 viewModel.name = etName.text.toString()
 
                 if (etEmail.text.toString().isNotEmpty()) {
                     viewModel.email = etEmail.text.toString()
-                    viewModel.registerUser()
+
+                    if (etTelegram.text.toString().isNotEmpty()) {
+                        viewModel.tgUserName = etTelegram.text.toString()
+                        viewModel.registerUser()
+                    } else {
+                        Toast.makeText(this, "Please enter a valid Telegram Username", Toast.LENGTH_SHORT).show()
+                    }
                 } else {
-                    Toast.makeText(this, "Please Enter Email ", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Please enter valid Email ID", Toast.LENGTH_SHORT).show()
                 }
             } else {
                 Toast.makeText(this, "Please Enter Name ", Toast.LENGTH_SHORT).show()

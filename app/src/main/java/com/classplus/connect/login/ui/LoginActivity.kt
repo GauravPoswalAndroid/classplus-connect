@@ -57,7 +57,7 @@ class LoginActivity : AppCompatActivity() {
                 if(etMobile.text.toString().trim().isNotEmpty())
                     getOtpForMobile(etMobile.text.toString().trim())
                 else
-                    Toast.makeText(this, "Please enter Mobile Number", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Please enter a valid Mobile Number", Toast.LENGTH_SHORT).show()
             }
 
         }
@@ -130,7 +130,7 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    private fun getFormattedUrl(data: OtpVerifyData?) = "${data?.landingUrl}?token=${data?.token}"
+    private fun getFormattedUrl(data: OtpVerifyData?) = "${data?.landingUrl}${data?.token}"
 
     private fun handleSuccess(data: GetOtpResponse?) {
         data?.let {

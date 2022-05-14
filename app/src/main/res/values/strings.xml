@@ -10,6 +10,7 @@
     <string name="user_name_characters">abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ 1234567890</string>
     <string name="name_hint">Enter Your Name</string>
     <string name="email_hint">Enter Your Email Address</string>
+    <string name="telegram_hint">Enter Your Telegram username</string>
     <string name="let_s_get_started">Let’s get started</string>
     <string name="you_are_logging_in_using">You are logging in using &lt;b>%s&lt;/b></string>
     <string name="verify_otp">Verify OTP</string>
