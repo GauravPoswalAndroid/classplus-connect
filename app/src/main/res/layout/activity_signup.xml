@@ -115,9 +115,10 @@
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvErrorName"
                 style="@style/error_text_view"
+                tools:visibility="gone"
                 app:layout_constraintStart_toStartOf="@id/llName"
                 app:layout_constraintTop_toBottomOf="@id/llName"
-                tools:text="Please enter valid name" />
+                tools:text="*Please enter valid name" />
 
             <LinearLayout
                 android:id="@+id/llEmail"
@@ -156,9 +157,10 @@
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvErrorEmail"
                 style="@style/error_text_view"
+                tools:visibility="gone"
                 app:layout_constraintStart_toStartOf="@id/llEmail"
                 app:layout_constraintTop_toBottomOf="@id/llEmail"
-                tools:text="Please enter valid name" />
+                tools:text="*Please enter valid Email" />
 
             <LinearLayout
                 android:id="@+id/llTelegram"
@@ -197,9 +199,10 @@
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvErrorTelegram"
                 style="@style/error_text_view"
+                tools:visibility="gone"
                 app:layout_constraintStart_toStartOf="@id/llTelegram"
                 app:layout_constraintTop_toBottomOf="@id/llTelegram"
-                tools:text="Please enter valid Telegram username" />
+                tools:text="*Please enter valid Telegram username" />
 
             <Button
                 android:id="@+id/btnNext"
@@ -247,11 +250,10 @@
                 android:id="@+id/lbl_email"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/email_address"
+                android:layout_marginTop="16dp"                android:text="@string/email_address"
                 android:textColor="#3C4852"
                 app:layout_constraintStart_toStartOf="@+id/llEmail"
-                app:layout_constraintTop_toBottomOf="@+id/llName" />
+                app:layout_constraintTop_toBottomOf="@+id/tvErrorName" />
 
             <TextView
                 android:id="@+id/lbl_telegram_username"
@@ -261,7 +263,7 @@
                 android:text="@string/telegram_username"
                 android:textColor="#3C4852"
                 app:layout_constraintStart_toStartOf="@+id/llTelegram"
-                app:layout_constraintTop_toBottomOf="@+id/llEmail" />
+                app:layout_constraintTop_toBottomOf="@+id/tvErrorEmail" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

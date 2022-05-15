@@ -77,22 +77,30 @@ class SignUpActivity : AppCompatActivity() {
         }
         btnNext.setOnClickListener {
             if (isValidName(etName.text.toString())) {
+                tvErrorName.hide()
                 viewModel.name = etName.text.toString()
 
                 if (isEmailValid(etEmail.text.toString())) {
+                    tvErrorEmail.hide()
                     viewModel.email = etEmail.text.toString()
 
                     if (etTelegram.text.toString().isNotEmpty()) {
                         viewModel.tgUserName = etTelegram.text.toString()
+                        tvErrorName.hide()
+                        tvErrorEmail.hide()
+                        tvErrorTelegram.hide()
                         viewModel.registerUser()
                     } else {
-                        Toast.makeText(this, "Please enter a valid Telegram Username", Toast.LENGTH_SHORT).show()
+                        tvErrorTelegram.show()
+                        tvErrorTelegram.text = "*Please enter a valid Telegram Username"
                     }
                 } else {
-                    Toast.makeText(this, "Please enter a valid Email ID", Toast.LENGTH_SHORT).show()
+                    tvErrorEmail.show()
+                    tvErrorEmail.text = "*Please enter a valid Email ID"
                 }
             } else {
-                Toast.makeText(this, "Please Enter a valid Name ", Toast.LENGTH_SHORT).show()
+                tvErrorName.show()
+                tvErrorName.text = "*Please Enter a valid Name"
             }
         }
         viewModel.registerUserResponse.observe(this) {
