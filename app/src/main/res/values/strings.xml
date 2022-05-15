@@ -19,7 +19,8 @@
     <string name="proceed_securely">Proceed Securely</string>
     <string name="verify_otp">Verify OTP</string>
     <string name="email_id_hint">Email ID</string>
-    <string name="verify_your_mobile_number">Verify your mobile number</string><string name="please_enter_the_4_digit_verification_code_sent_to_you_at_91">Please enter the 4-digit verification code sent to you at &lt;b>%s&lt;/b</string>
+    <string name="verify_your_mobile_number">Verify your mobile number</string>
+    <string name="formatter_string">Please enter the 4-digit verification code sent to you at &lt;b>%s&lt;/b</string>
     <string name="enter_otp_here">Enter OTP here</string>
     <string name="resend_code_in">Send OTP again</string>
     <string name="retry_via_call">Retry via call</string>

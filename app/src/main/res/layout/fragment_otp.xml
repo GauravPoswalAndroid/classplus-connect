@@ -11,18 +11,19 @@
         android:id="@+id/frame1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
+        android:background="@drawable/drawable_bg_shadow"
         android:elevation="20dp"
-        android:background="@drawable/drawable_bg_shadow">
+        android:paddingStart="16dp"
+        android:paddingTop="24dp"
+        android:paddingEnd="16dp">
 
         <ImageView
             android:id="@+id/iv_back_btn"
             android:layout_width="20dp"
             android:layout_height="20dp"
+            android:layout_marginBottom="18dp"
             app:layout_constraintBottom_toTopOf="@+id/tv_login_heading"
             app:layout_constraintLeft_toLeftOf="parent"
-            android:layout_marginBottom="18dp"
             app:srcCompat="@drawable/ic_arrow_left_black"
             tools:ignore="ContentDescription" />
 
@@ -45,7 +46,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
             android:lineSpacingExtra="5sp"
-            android:text="@string/please_enter_the_4_digit_verification_code_sent_to_you_at_91"
+            android:text="@string/formatter_string"
             android:textSize="14sp"
             app:layout_constraintBottom_toTopOf="@+id/et_enter_otp"
             app:layout_constraintLeft_toLeftOf="parent" />
@@ -74,10 +75,10 @@
             android:layout_marginTop="5dp"
             android:textColor="@color/faculty_text"
             android:textSize="14sp"
-            tools:text="*Invalid OTP"
             android:visibility="gone"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/et_enter_otp" />
+            app:layout_constraintTop_toBottomOf="@+id/et_enter_otp"
+            tools:text="*Invalid OTP" />
 
         <TextView
             android:id="@+id/tv_resend_cta"
@@ -153,7 +154,7 @@
             android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/ll_verify_otp"
+            app:layout_constraintTop_toBottomOf="@id/verify_otp"
             app:layout_constraintVertical_bias="0.0" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

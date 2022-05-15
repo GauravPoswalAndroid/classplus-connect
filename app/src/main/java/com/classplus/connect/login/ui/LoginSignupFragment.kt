@@ -23,8 +23,6 @@ import com.classplus.connect.util.Status
 import com.classplus.connect.util.hide
 import com.classplus.connect.util.show
 import kotlinx.android.synthetic.main.fragment_login_signup.*
-import kotlinx.android.synthetic.main.fragment_login_signup.tv_enter_number_email
-import kotlinx.android.synthetic.main.fragment_otp.*
 import kotlinx.android.synthetic.main.loading_button.view.*
 
 class LoginSignupFragment : Fragment() {

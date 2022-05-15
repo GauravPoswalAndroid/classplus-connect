@@ -25,13 +25,13 @@
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/tv_enter_number_email"
+            app:layout_constraintBottom_toTopOf="@+id/tv_enter_number_email_otp"
             app:layout_constraintLeft_toLeftOf="parent"
             android:text="@string/login_or_signup" />
 
 
         <TextView
-            android:id="@+id/tv_enter_number_email"
+            android:id="@+id/tv_enter_number_email_otp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
