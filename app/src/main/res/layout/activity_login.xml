@@ -30,22 +30,14 @@
         app:layout_constraintTop_toBottomOf="@+id/appLogo"
         tools:ignore="ContentDescription" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/cl_lvl"
-        android:layout_width="match_parent"
-        android:layout_height="290dp"
+
+    <com.classplus.connect.login.ui.NonSwipableViewPager
+        android:id="@+id/login_viewPager"
+        android:layout_width="0dp"
+        android:layout_height="310dp"
         android:background="@drawable/shape_rectangle_filled_white_r10_tr_tl"
-        app:layout_constraintBottom_toBottomOf="parent">
-
-        <com.classplus.connect.login.ui.NonSwipableViewPager
-            android:id="@+id/login_viewPager"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
