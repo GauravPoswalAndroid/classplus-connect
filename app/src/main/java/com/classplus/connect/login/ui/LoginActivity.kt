@@ -53,8 +53,10 @@ class LoginActivity : AppCompatActivity() {
 
                 override fun onPageSelected(position: Int) {
                     if (position == 1) {
+                        viewModel.isOtpPageShowing = true
                         ((login_viewPager.adapter as ViewPagerAdapter).getItem(1) as OtpFragment).setMobileNumber()
                     }
+                    else viewModel.isOtpPageShowing = false
                 }
 
                 override fun onPageScrollStateChanged(state: Int) {}

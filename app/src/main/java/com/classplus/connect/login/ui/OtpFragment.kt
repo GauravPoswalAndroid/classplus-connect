@@ -69,11 +69,17 @@ class OtpFragment : Fragment() {
         }
 
 
-
         viewModel.isInvalidOtp.observe(viewLifecycleOwner) {
             tv_send_again.visibility = View.GONE
             tv_otp_error.visibility = View.VISIBLE
             tv_otp_error.text = "*Invalid OTP. Please check and try again."
+        }
+        viewModel.showSendAgainProgress.observe(viewLifecycleOwner) { shouldShow ->
+            if (shouldShow) {
+                verify_otp.progress_bar.show()
+            } else {
+                verify_otp.progress_bar.hide()
+            }
         }
         viewModel.verifyOtpResponse.observe(viewLifecycleOwner) {
             it?.let { resource ->

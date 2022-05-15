@@ -16,6 +16,7 @@ class LoginViewModel(
     private val listingRepository: LoginDataRepository,
 ) : ViewModel() {
 
+    var isOtpPageShowing: Boolean = false
     lateinit var userMobile: String
     lateinit var sessionId: String
     lateinit var otp: String
@@ -23,6 +24,7 @@ class LoginViewModel(
 
     val updatePagerNavToPage = MutableLiveData<Int>()
     val isInvalidOtp = MutableLiveData<Boolean>()
+    val showSendAgainProgress = MutableLiveData<Boolean>()
 
     private val _getOtpResponse = MutableLiveData<Resource<GetOtpResponse>>()
     val getOtpResponse: LiveData<Resource<GetOtpResponse>>

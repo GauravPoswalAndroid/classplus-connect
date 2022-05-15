@@ -92,13 +92,16 @@ class LoginSignupFragment : Fragment() {
                     Status.SUCCESS -> {
                         ll_proceed.progress_bar.hide()
                         handleSuccess(resource.data)
+                        if(viewModel.isOtpPageShowing) viewModel.showSendAgainProgress.value = false
                     }
                     Status.ERROR -> {
+                        if(viewModel.isOtpPageShowing) viewModel.showSendAgainProgress.value = false
                         ll_proceed.progress_bar.hide()
                         Toast.makeText(context, it.message ?: "Some Error Occurred!", Toast.LENGTH_SHORT).show()
                     }
                     Status.LOADING -> {
                         ll_proceed.progress_bar.show()
+                        if(viewModel.isOtpPageShowing) viewModel.showSendAgainProgress.value = true
                     }
                 }
             }
