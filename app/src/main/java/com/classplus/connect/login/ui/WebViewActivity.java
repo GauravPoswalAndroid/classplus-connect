@@ -32,6 +32,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.classplus.connect.R;
 import com.classplus.connect.login.data.model.DeeplinkModel;
 import com.classplus.connect.util.SharedPreferenceHelper;
+import com.classplus.connect.util.Utility;
 import com.classplus.connect.webview.VideoEnabledWebChromeClient;
 import com.classplus.connect.webview.VideoEnabledWebView;
 import com.google.gson.Gson;
@@ -42,12 +43,34 @@ public class WebViewActivity extends AppCompatActivity {
     public static final String UTIL_SHARE = "UTIL_SHARE";
     public static final String SOCIAL_LINKS_SHARE = "SOCIAL_LINKS_SHARE";
     public static final String UTIL_LOG_OUT = "UTIL_LOG_OUT";
+    public static final String WHATSAPP_PACKAGE_NAME = "com.whatsapp";
+    public static final String FACEBOOK_PACKAGE_NAME = "com.facebook.katana";
+    public static final String FACEBOOK_LITE_PACKAGE_NAME = "com.facebook.lite";
+    public static final String TELEGRAM_PACKAGE_NAME = "org.telegram.messenger";
 
     public static final String PARAM_URL = "PARAM_URL";
     private static final String TAG = "WebViewActivity";
     private ProgressBar progressBar;
     private VideoEnabledWebView webView;
     private VideoEnabledWebChromeClient webChromeClient;
+
+    //SocialMedia TYPE
+    public enum SocialMediaType {
+
+        WHATSAPP(0),
+        FACEBOOK(1),
+        TELEGRAM(2);
+
+        private final int mType;
+
+        SocialMediaType(int type) {
+            mType = type;
+        }
+
+        public int getType() {
+            return mType;
+        }
+    }
 
     public static void startActivity(Context context, String url) {
         Intent intent = new Intent(context, WebViewActivity.class);
@@ -246,12 +269,31 @@ public class WebViewActivity extends AppCompatActivity {
         public void onDeeplinkExecutedV2(String deeplinkModel) {
             try {
                 DeeplinkModel dModel = new Gson().fromJson(deeplinkModel, DeeplinkModel.class);
-                if(dModel.getScreen() != null && dModel.getScreen().equals(UTIL_LOG_OUT)){
+                if (dModel.getScreen() != null && dModel.getScreen().equals(UTIL_LOG_OUT)) {
                     SharedPreferenceHelper.saveToken(WebViewActivity.this, null);
                     SharedPreferenceHelper.saveLandingUrl(WebViewActivity.this, null);
                     LoginActivity.Companion.startActivity(WebViewActivity.this);
                     WebViewActivity.this.finish();
 
+                } else if (dModel.getScreen() != null && dModel.getScreen().equals(UTIL_COPY)) {
+                    Toast.makeText(WebViewActivity.this, WebViewActivity.this.getString(R.string.copied_to_clipboard),
+                            Toast.LENGTH_SHORT).show();
+                    Utility.INSTANCE.copyToClipboard(WebViewActivity.this, dModel.getParamOne());
+                } else if (dModel.getScreen() != null && dModel.getScreen().equals(UTIL_SHARE)) {
+                    Utility.INSTANCE.shareMoreApps(WebViewActivity.this, dModel.getParamOne());
+                } else if (dModel.getScreen() != null && dModel.getScreen().equals(SOCIAL_LINKS_SHARE)) {
+                    if(SocialMediaType.WHATSAPP.toString().equals(dModel.getParamOne())) {
+                        Utility.INSTANCE.shareTextOverApp(WebViewActivity.this, WHATSAPP_PACKAGE_NAME,
+                                dModel.getParamTwo(), dModel.getParamThree());
+                    }
+                    if(SocialMediaType.FACEBOOK.toString().equals(dModel.getParamOne())){
+                        Utility.INSTANCE.shareTextOverApp(WebViewActivity.this, FACEBOOK_PACKAGE_NAME,
+                                dModel.getParamTwo(), dModel.getParamThree());
+                    }
+                    if(SocialMediaType.TELEGRAM.toString().equals(dModel.getParamOne())){
+                        Utility.INSTANCE.shareTextOverApp(WebViewActivity.this, TELEGRAM_PACKAGE_NAME,
+                                dModel.getParamTwo(), dModel.getParamThree());
+                    }
                 }
             } catch (Exception e) {
                 Log.e(TAG, "onDeeplinkExecutedV2: "+e.getMessage());
