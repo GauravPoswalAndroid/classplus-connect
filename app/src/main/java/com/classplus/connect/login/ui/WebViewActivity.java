@@ -118,9 +118,10 @@ public class WebViewActivity extends AppCompatActivity {
         webView.setWebChromeClient(webChromeClient);
 
         WebSettings webSettings = webView.getSettings();
-//        webSettings.setLoadWithOverviewMode(true);
+        webSettings.setLoadWithOverviewMode(true);
         webSettings.setUseWideViewPort(true);
-        //webSettings.setBuiltInZoomControls(true);
+        webSettings.setBuiltInZoomControls(false);
+        webSettings.setDisplayZoomControls(false);
         webSettings.setJavaScriptEnabled(true);
         webSettings.setDomStorageEnabled(true);
         webSettings.setLoadsImagesAutomatically(true);
