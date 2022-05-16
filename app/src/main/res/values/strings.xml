@@ -1,4 +1,37 @@
 <resources>
     <string name="app_name">Classplus Connect</string>
     <string name="select_file">Select File</string>
+    <string name="india_code">+91</string>
+    <string name="label_mobile_number_hint">Mobile Number</string>
+    <string name="label_otp_hint">Enter OTP</string>
+    <string name="may_we_know_you">May we know your details before you continue?</string>
+    <string name="enter_details">Please enter the following details that we will use to address you everywhere inside the app.</string>
+    <string name="user_name_characters">abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ 1234567890</string>
+    <string name="name_hint">Enter Your Name</string>
+    <string name="email_hint">Enter Your Email Address</string>
+    <string name="telegram_hint">Enter Your Telegram username</string>
+    <string name="let_s_get_started">Let’s get started</string>
+    <string name="you_are_logging_in_using">You are logging in using &lt;b>%s&lt;/b></string>
+    <string name="wrong_otp">Wrong OTP</string>
+    <string name="str_terms_and_conditions_new">By continuing, you agree to the <u><font color='#2278FF'><annotation click="">Terms &amp; Conditions</annotation></font></u></string>
+    <string name="enter_your_mobile_number">Please Enter your mobile number</string>
+    <string name="login_or_signup">Login or Signup</string>
+    <string name="proceed_securely">Proceed Securely</string>
+    <string name="verify_otp">Verify OTP</string>
+    <string name="email_id_hint">Email ID</string>
+    <string name="verify_your_mobile_number">Verify your mobile number</string>
+    <string name="formatter_string">Please enter the 4-digit verification code sent to you at &lt;b>%s&lt;/b</string>
+    <string name="enter_otp_here">Enter OTP here</string>
+    <string name="resend_code_in">Send OTP again</string>
+    <string name="retry_via_call">Retry via call</string>
+
+    <string name="send_otp_again">Send OTP again</string>
+    <string name="name">Name*</string>
+    <string name="email_address">Email Address*</string>
+    <string name="telegram_username">Telegram Username*</string>
+
+    <string name="copied_text">copied text</string>
+    <string name="copied_to_clipboard">Copied to clipboard</string>
+    <string name="share">Share</string>
+
 </resources>
