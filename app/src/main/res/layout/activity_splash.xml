@@ -7,27 +7,18 @@
     android:background="@drawable/bg_splash"
     tools:context=".login.ui.SplashActivity">
 
-    <ImageView
-        android:id="@+id/appLogo"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:src="@drawable/clp_banner"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintVertical_bias="0.27"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="ContentDescription" />
 
     <ImageView
         android:id="@+id/splashAnim"
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:layout_marginTop="20dp"
-        android:src="@drawable/splash_logo"
+        android:src="@drawable/ic_connect_banner_v2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appLogo"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.30"
+        app:layout_constraintBottom_toBottomOf="parent"
         tools:ignore="ContentDescription" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
