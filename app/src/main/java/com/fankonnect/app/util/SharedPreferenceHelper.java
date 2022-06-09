@@ -4,9 +4,9 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 public class SharedPreferenceHelper {
-    private final static String PREF_FILE = "CLP_CONNECT_PREF";
+    private final static String PREF_FILE = "FAN_CONNECT_PREF";
     private final static String TOKEN = "TOKEN";
-    private final static String LANDING_URL = "CLP_CONNECT_PREF";
+    private final static String LANDING_URL = "LANDING_URL";
 
     /**
      * Set a string shared preference
