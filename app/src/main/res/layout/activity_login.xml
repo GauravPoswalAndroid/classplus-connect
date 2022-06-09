@@ -21,7 +21,7 @@
         tools:ignore="ContentDescription" />
 
 
-    <com.classplus.connect.login.ui.NonSwipableViewPager
+    <com.fankonnect.app.login.ui.NonSwipableViewPager
         android:id="@+id/login_viewPager"
         android:layout_width="0dp"
         android:layout_height="310dp"

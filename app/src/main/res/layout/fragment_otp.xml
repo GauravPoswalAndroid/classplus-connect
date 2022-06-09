@@ -92,7 +92,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/et_enter_otp" />
 
-        <com.classplus.connect.login.ui.LoadingButtonVerifyOtp
+        <com.fankonnect.app.login.ui.LoadingButtonVerifyOtp
             android:id="@+id/verify_otp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
