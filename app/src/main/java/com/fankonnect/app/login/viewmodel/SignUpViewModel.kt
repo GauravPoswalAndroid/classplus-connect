@@ -19,7 +19,6 @@ class SignUpViewModel(
     lateinit var userMobile: String
     lateinit var name: String
     lateinit var email: String
-    lateinit var tgUserName: String
     lateinit var otp: String
     lateinit var sessionId: String
 
@@ -32,7 +31,7 @@ class SignUpViewModel(
         _registerUserResponse.value = Resource.loading(null)
         try {
             _registerUserResponse.value = Resource.success(
-                listingRepository.registerUser(otp, userMobile, sessionId, name, email, tgUserName)
+                listingRepository.registerUser(otp, userMobile, sessionId, name, email)
             )
         } catch (throwable: Throwable) {
             when (throwable) {

@@ -75,24 +75,16 @@ class SignUpActivity : AppCompatActivity() {
             finish()
         }
         btnNext.setOnClickListener {
-            if (isValidName(etName.text.toString())) {
+            if (isValidName(etName.text.toString().trim())) {
                 tvErrorName.hide()
-                viewModel.name = etName.text.toString()
+                viewModel.name = etName.text.toString().trim()
 
-                if (isEmailValid(etEmail.text.toString())) {
+                if (isEmailValid(etEmail.text.toString().trim())) {
                     tvErrorEmail.hide()
-                    viewModel.email = etEmail.text.toString()
-
-                    if (etTelegram.text.toString().isNotEmpty()) {
-                        viewModel.tgUserName = etTelegram.text.toString()
-                        tvErrorName.hide()
-                        tvErrorEmail.hide()
-                        tvErrorTelegram.hide()
-                        viewModel.registerUser()
-                    } else {
-                        tvErrorTelegram.show()
-                        tvErrorTelegram.text = "*Please enter a valid Telegram Username"
-                    }
+                    viewModel.email = etEmail.text.toString().trim()
+                    tvErrorName.hide()
+                    tvErrorEmail.hide()
+                    viewModel.registerUser()
                 } else {
                     tvErrorEmail.show()
                     tvErrorEmail.text = "*Please enter a valid Email ID"
@@ -128,7 +120,7 @@ class SignUpActivity : AppCompatActivity() {
     }
 
     private fun isValidName(name: String): Boolean {
-        return name.isNotEmpty() && !name.toCharArray()[0].isDigit()
+        return name.isNotEmpty() && name.length > 2 && !name.toCharArray()[0].isDigit()
     }
 
     private fun isEmailValid(email: String?): Boolean {
