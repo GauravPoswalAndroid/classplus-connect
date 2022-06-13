@@ -100,4 +100,17 @@ object Utility {
             context.startActivity(i)
         }
     }
+
+    fun openWebPage(context: Context, pageUrl: String?) {
+        if (pageUrl == null) {
+            Toast.makeText(context, context.getString(R.string.error_loading), Toast.LENGTH_SHORT)
+                .show()
+            return
+        }
+        Intent(context, WebViewActivity::class.java).apply {
+            putExtra(WebViewActivity.PARAM_URL, pageUrl)
+        }.also {
+            context.startActivity(it)
+        }
+    }
 }

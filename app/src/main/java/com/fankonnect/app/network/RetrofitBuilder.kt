@@ -6,7 +6,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitBuilder {
-    private const val BASE_URL = "https://content-sub-apip.fankonnect.com/clp-connect/v1/"
+    private const val BASE_URL = "http://content-sub-apip.fankonnect.com/clp-connect/v1/"
 
     private val okHttpClient = OkHttpClient.Builder().addInterceptor(
         HttpLoggingInterceptor().apply {

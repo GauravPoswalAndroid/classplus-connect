@@ -1,23 +1,23 @@
 package com.fankonnect.app.login.ui
 
+import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
-import android.text.Editable
-import android.text.Html
-import android.text.TextWatcher
+import android.text.*
+import android.text.Annotation
+import android.text.method.LinkMovementMethod
+import android.text.style.ClickableSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.fankonnect.app.R
 import com.fankonnect.app.login.data.model.OtpVerifyData
 import com.fankonnect.app.login.viewmodel.LoginViewModel
-import com.fankonnect.app.util.SharedPreferenceHelper
-import com.fankonnect.app.util.Status
-import com.fankonnect.app.util.hide
-import com.fankonnect.app.util.show
+import com.fankonnect.app.util.*
 import kotlinx.android.synthetic.main.fragment_otp.*
 import kotlinx.android.synthetic.main.loading_button.view.*
 
@@ -37,6 +37,7 @@ class OtpFragment : Fragment() {
         viewModel = ViewModelProvider(requireActivity())[LoginViewModel::class.java]
         verify_otp.enableDisableButton(false)
         setObservers()
+        setTermsConditionsText()
     }
 
     private fun setObservers() {
@@ -145,6 +146,41 @@ class OtpFragment : Fragment() {
                     mobileNo
                 )
             )
+    }
+
+    private fun setTermsConditionsText() {
+        val tncText = getText(R.string.str_terms_and_conditions_new) as SpannedString
+        val ssb = SpannableStringBuilder(tncText)
+        val annotations = tncText.getSpans(0, tncText.length, Annotation::class.java)
+        if (annotations != null && annotations.isNotEmpty()) {
+            for (annotation in annotations) {
+                if (annotation.key == "click") {
+                    ssb.setSpan(
+                        object : ClickableSpan() {
+                            override fun onClick(widget: View) {
+                                Utility.openWebPage(
+                                    requireContext(),
+                                    AppConstants.FAN_CONNECT_PRIVACY_POLICY_URL
+                                )
+                            }
+
+                            override fun updateDrawState(paint: TextPaint) {
+                                super.updateDrawState(paint)
+                                paint.isUnderlineText = true
+                                paint.color =
+                                    ContextCompat.getColor(requireContext(), R.color.accent_color)
+                            }
+                        },
+                        tncText.getSpanStart(annotation),
+                        tncText.getSpanEnd(annotation),
+                        Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+                    )
+                }
+            }
+        }
+        tv_terms_conditions.text = ssb
+        tv_terms_conditions.movementMethod = LinkMovementMethod.getInstance()
+        tv_terms_conditions.highlightColor = Color.TRANSPARENT
     }
 
     companion object {
