@@ -14,7 +14,7 @@
     <string name="you_are_logging_in_using">You are logging in using &lt;b>%s&lt;/b></string>
     <string name="wrong_otp">Wrong OTP</string>
     <string name="str_terms_and_conditions_new">By continuing, you agree to the <u><font color='#2278FF'><annotation click="">Terms &amp; Conditions</annotation></font></u></string>
-    <string name="enter_your_mobile_number">Please Enter your mobile number</string>
+    <string name="enter_your_mobile_number">Please enter your mobile number</string>
     <string name="login_or_signup">Login or Signup</string>
     <string name="proceed_securely">Proceed Securely</string>
     <string name="verify_otp">Verify OTP</string>
