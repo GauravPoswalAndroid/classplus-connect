@@ -43,8 +43,8 @@ class LoginActivity : AppCompatActivity() {
             addFragment(OtpFragment.newInstance())
 
         }.also {
-            login_viewPager.adapter = it
-            login_viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+            loginViewPager.adapter = it
+            loginViewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
                 override fun onPageScrolled(
                     position: Int,
                     positionOffset: Float,
@@ -54,7 +54,7 @@ class LoginActivity : AppCompatActivity() {
                 override fun onPageSelected(position: Int) {
                     if (position == 1) {
                         viewModel.isOtpPageShowing = true
-                        ((login_viewPager.adapter as ViewPagerAdapter).getItem(1) as OtpFragment).setMobileNumber()
+                        ((loginViewPager.adapter as ViewPagerAdapter).getItem(1) as OtpFragment).setMobileNumber()
                     }
                     else viewModel.isOtpPageShowing = false
                 }
@@ -68,7 +68,7 @@ class LoginActivity : AppCompatActivity() {
 
         viewModel.updatePagerNavToPage.observe(this) {
             Log.i(TAG, "setUpObservers: PagerNavigatedToPage: $it")
-            login_viewPager.currentItem = it
+            loginViewPager.currentItem = it
         }
     }
 

@@ -22,7 +22,7 @@
 
 
     <com.fankonnect.app.login.ui.NonSwipableViewPager
-        android:id="@+id/login_viewPager"
+        android:id="@+id/loginViewPager"
         android:layout_width="0dp"
         android:layout_height="310dp"
         android:background="@drawable/shape_rectangle_filled_white_r10_tr_tl"

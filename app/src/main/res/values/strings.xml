@@ -34,5 +34,7 @@
     <string name="copied_to_clipboard">Copied to clipboard</string>
     <string name="share">Share</string>
     <string name="error_loading">Error Loading</string>
+    <string name="login_signup">Login / Signup</string>
+    <string name="carousel_image">Carousel Image</string>
 
 </resources>
