@@ -101,6 +101,8 @@
             android:textSize="14sp"
             android:textStyle="bold"
             android:gravity="center"
+            android:visibility="gone"
+            tools:visibility="visible"
             android:layout_marginEnd="12dp"
             app:layout_constraintTop_toTopOf="@id/llEnterNo"
             app:layout_constraintEnd_toEndOf="@id/llEnterNo"
@@ -124,6 +126,8 @@
             android:layout_marginBottom="24dp"
             android:lineSpacingExtra="4sp"
             android:padding="2dp"
+            android:visibility="gone"
+            tools:visibility="visible"
             android:text="@string/enter_otp_here"
             android:textColor="@color/textColor"
             android:textSize="14sp"
@@ -137,6 +141,8 @@
             android:layout_marginTop="8dp"
             android:focusableInTouchMode="true"
             android:gravity="start"
+            android:visibility="gone"
+            tools:visibility="visible"
             android:importantForAutofill="no"
             android:inputType="number"
             android:textColor="@color/textColor"
@@ -174,6 +180,8 @@
             android:text="@string/waiting_for_otp"
             android:textColor="@color/textColor"
             android:textSize="14sp"
+            android:visibility="gone"
+            tools:visibility="visible"
             app:layout_constraintStart_toStartOf="@id/tvErrorOtp"
             app:layout_constraintTop_toBottomOf="@id/tvErrorOtp" />
 
@@ -188,6 +196,8 @@
             android:textColor="@color/colorPrimary"
             android:textSize="14sp"
             android:textStyle="bold"
+            android:visibility="gone"
+            tools:visibility="visible"
             app:layout_constraintStart_toStartOf="@id/tvOtpTimer"
             app:layout_constraintTop_toBottomOf="@id/tvOtpTimer" />
 

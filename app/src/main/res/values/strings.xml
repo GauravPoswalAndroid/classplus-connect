@@ -20,7 +20,7 @@
     <string name="login_or_signup">Login or Signup</string>
     <string name="create_your_account">Create your Account</string>
     <string name="proceed">Proceed</string>
-    <string name="verify_otp">Verify OTP</string>
+    <string name="verify">Verify</string>
     <string name="email_id_hint">Email ID</string>
     <string name="verify_your_mobile_number">Verify your mobile number</string>
     <string name="formatter_string">Please enter the 4-digit verification code sent to you at &lt;b>%s&lt;/b</string>

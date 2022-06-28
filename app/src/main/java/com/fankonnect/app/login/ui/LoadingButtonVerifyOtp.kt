@@ -25,7 +25,7 @@ class LoadingButtonVerifyOtp @JvmOverloads constructor(
             with(resources) {
                 val title = getText(typedArray
                         .getResourceId(R.styleable
-                                .LoadingButton_title, R.string.verify_otp))
+                                .LoadingButton_title, R.string.verify))
                 setButtonData(title.toString(), typedArray.getResourceId(R.styleable.LoadingButton_drawableStart, 0))
             }
 

@@ -19,6 +19,8 @@ import com.fankonnect.app.R
 import com.fankonnect.app.base.ViewModelFactory
 import com.fankonnect.app.login.data.api.LoginApiService
 import com.fankonnect.app.login.data.model.GetOtpResponse
+import com.fankonnect.app.login.data.model.LoginState
+import com.fankonnect.app.login.data.model.OtpVerifyData
 import com.fankonnect.app.login.data.repository.LoginDataRepository
 import com.fankonnect.app.login.viewmodel.LoginViewModel
 import com.fankonnect.app.network.RetrofitBuilder
@@ -27,6 +29,7 @@ import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity() {
     lateinit var viewModel: LoginViewModel
+    private var currentLoginState: LoginState = LoginState.MobileState()
 
     companion object {
         private const val TAG = "LoginActivity"
@@ -53,22 +56,43 @@ class LoginActivity : AppCompatActivity() {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
             override fun afterTextChanged(s: Editable?) {
-                enableDisableButton(s.toString().length >= 10)
+                enableDisableButton(s.toString().length < 10)
             }
 
         })
         tvLoginSignUp.setOnClickListener {
-            if(isMobileValid()){
-                viewModel.getOtpWithMobile((etMobile.text.toString()))
+            when (currentLoginState) {
+                is LoginState.MobileState -> {
+                    if (isMobileValid()) {
+                        viewModel.getOtpWithMobile((etMobile.text.toString()))
+                    }
+                }
+                is LoginState.OtpState -> {
+                    if (isOtpValid()) {
+                        viewModel.verifyOtp((otpView.text.toString()))
+                    }
+                }
             }
         }
-        otpView.setOtpCompletionListener{
-            Toast.makeText(this, "$it is the OTP!!", Toast.LENGTH_SHORT).show()
+        otpView.setOtpCompletionListener {
+            enableDisableButton(false)
+            tvErrorOtp.hide()
+        }
+        otpView.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun afterTextChanged(s: Editable?) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                enableDisableButton(s.toString().length < 4)
+            }
+
+        })
+        tvEdit.setOnClickListener {
+            updateLoginState(LoginState.MobileState())
         }
     }
 
     private fun isMobileValid() =
-        if (etMobile.text.toString().isEmpty() || etMobile.text.toString().length > 10) {
+        if (etMobile.text.toString().isEmpty() || etMobile.text.toString().length < 10) {
             tvErrorMobile.show()
             false
         } else {
@@ -76,21 +100,22 @@ class LoginActivity : AppCompatActivity() {
             true
         }
 
-
-    private fun enableDisableButton(shouldBeActive: Boolean) {
-        if (shouldBeActive) {
-            tvLoginSignUp.background = ResourcesCompat.getDrawable(
-                resources,
-                R.drawable.bg_button_click_color_primary,
-                theme
-            )
+    private fun isOtpValid() =
+        if (otpView.text.toString().isEmpty() || otpView.text.toString().length < 4) {
+            tvErrorOtp.show()
+            false
         } else {
-            tvLoginSignUp.background = ResourcesCompat.getDrawable(
-                resources,
-                R.drawable.bg_round_corners_primary_light,
-                theme
-            )
+            tvErrorOtp.hide()
+            true
         }
+
+
+    private fun enableDisableButton(shouldBeInActive: Boolean) {
+        tvLoginSignUp.background = ResourcesCompat.getDrawable(
+            resources,
+            if (shouldBeInActive) R.drawable.bg_round_corners_primary_light else R.drawable.bg_button_click_color_primary,
+            theme
+        )
     }
 
     private fun setUpToolbar() {
@@ -156,7 +181,11 @@ class LoginActivity : AppCompatActivity() {
                     }
                     Status.ERROR -> {
 //                        if(viewModel.isOtpPageShowing) viewModel.showSendAgainProgress.value = false
-                        Toast.makeText(this, it.message ?: "Some Error Occurred!", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            this,
+                            it.message ?: "Some Error Occurred!",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
                     Status.LOADING -> {
 //                        if(viewModel.isOtpPageShowing) viewModel.showSendAgainProgress.value = true
@@ -164,12 +193,88 @@ class LoginActivity : AppCompatActivity() {
                 }
             }
         }
+        viewModel.verifyOtpResponse.observe(this) {
+            it?.let { resource ->
+                when (resource.status) {
+                    Status.SUCCESS -> {
+                        if (resource.data?.data?.exists == 1) {
+                            SharedPreferenceHelper.saveToken(
+                                this,
+                                resource.data.data.token
+                            )
+                            SharedPreferenceHelper.saveLandingUrl(
+                                this,
+                                resource.data.data.landingUrl
+                            )
+                            WebViewActivity.startActivity(
+                                this,
+                                getFormattedUrl(resource.data.data)
+                            )
+                            finish()
+                        } else {
+                            SignUpActivity.start(
+                                this,
+                                viewModel.userMobile,
+                                viewModel.otp,
+                                viewModel.sessionId
+                            )
+                        }
+
+                    }
+                    Status.ERROR -> {
+                        Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
+                    }
+                    Status.LOADING -> {
+                    }
+                }
+            }
+        }
     }
+
+    private fun getFormattedUrl(data: OtpVerifyData?) = "${data?.landingUrl}${data?.token}"
 
     private fun handleSuccess(data: GetOtpResponse?) {
         data?.let {
             viewModel.sessionId = data.data.sessionId
-            viewModel.updatePagerNavToPage.value = 1
+            updateLoginState(LoginState.OtpState())
+        }
+    }
+
+    private fun updateLoginState(state: LoginState) {
+        currentLoginState = state
+        when (state) {
+            is LoginState.MobileState -> {
+                tvEnterMobile.text = getString(R.string.enter_your_mobile_number)
+                llEnterNo.background = ResourcesCompat.getDrawable(
+                    resources,
+                    R.drawable.shape_rectangle_filled_white_outline_gray_r6,
+                    theme
+                )
+                etMobile.isEnabled = true
+                tvEdit.hide()
+                tvEnterOtp.hide()
+                otpView.hide()
+                otpView.setText("")
+                tvOtpTimer.hide()
+                tvSendOtpAgain.hide()
+                tvLoginSignUp.text = getString(R.string.proceed)
+                enableDisableButton(false)
+            }
+            is LoginState.OtpState -> {
+                tvEnterMobile.text = getString(R.string.sent_otp_to_number)
+                llEnterNo.background = ResourcesCompat.getDrawable(
+                    resources,
+                    R.drawable.bg_round_corners_grey,
+                    theme
+                )
+                etMobile.isEnabled = false
+                tvEdit.show()
+                tvEnterOtp.show()
+                otpView.show()
+                tvOtpTimer.show()
+                tvLoginSignUp.text = getString(R.string.verify)
+                enableDisableButton(true)
+            }
         }
     }
 
