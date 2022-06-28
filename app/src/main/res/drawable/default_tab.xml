@@ -3,10 +3,17 @@
     <item>
         <shape
             android:innerRadius="0dp"
-            android:shape="ring"
-            android:thickness="8dp"
+            android:shape="rectangle"
+            android:thickness="10dp"
             android:useLevel="false">
-            <solid android:color="@color/colorPrimaryWith40Alpha"/>
+            <stroke
+                android:width="0.5dp"
+                android:color="@color/colorPrimary" />
+            <solid android:color="@color/colorPrimaryWith40Alpha" />
+            <corners android:radius="20dp" />
+            <size
+                android:width="30dp"
+                android:height="8dp" />
         </shape>
     </item>
 </layer-list>

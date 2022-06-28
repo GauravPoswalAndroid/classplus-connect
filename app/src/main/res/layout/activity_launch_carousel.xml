@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".login.ui.LaunchCarouselActivity">
 
-    <com.fankonnect.app.login.ui.NonSwipableViewPager
+    <androidx.viewpager.widget.ViewPager
         android:id="@+id/carouselViewPager"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -18,7 +18,7 @@
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabLayout"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginBottom="40dp"
@@ -26,7 +26,7 @@
         app:tabGravity="center"
         app:tabIndicatorHeight="0dp"
         app:layout_constraintBottom_toTopOf="@id/viewSeparator"
-        android:layout_height="wrap_content"/>
+        android:layout_height="8dp"/>
 
     <View
         android:id="@+id/viewSeparator"
