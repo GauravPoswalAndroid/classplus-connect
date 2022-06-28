@@ -19,7 +19,7 @@ class SplashActivity : AppCompatActivity() {
             if (true == token?.isNotEmpty() && true == landingUrl?.isNotEmpty())
                 WebViewActivity.startActivity(this, "$landingUrl$token")
             else
-                LaunchCarouselActivity.startActivity(this)
+                SignUpActivity.start(this, "", "", "")
             finish()
         }, 3000)
     }

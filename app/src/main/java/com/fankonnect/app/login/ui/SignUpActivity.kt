@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.text.Html
 import android.text.TextUtils
 import android.util.Patterns
+import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
@@ -21,7 +22,10 @@ import com.fankonnect.app.util.SharedPreferenceHelper
 import com.fankonnect.app.util.Status
 import com.fankonnect.app.util.hide
 import com.fankonnect.app.util.show
+import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_signup.*
+import kotlinx.android.synthetic.main.activity_signup.toolbar
+
 class SignUpActivity : AppCompatActivity() {
     private lateinit var viewModel: SignUpViewModel
 
@@ -50,6 +54,24 @@ class SignUpActivity : AppCompatActivity() {
         setContentView(R.layout.activity_signup)
         initProperties()
         setObservers()
+        setUpToolbar()
+    }
+
+    private fun setUpToolbar() {
+        setSupportActionBar(toolbar)
+        supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_arrow_left_black)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.title = getString(R.string.create_your_account)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> {
+                finish()
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     private fun initProperties() {
@@ -62,38 +84,10 @@ class SignUpActivity : AppCompatActivity() {
 
         val mobileNo = "+91-${viewModel.userMobile}"
         val credentialColor = "<font color='#000000'>$mobileNo</font>"
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
-            tvLoggingMessage.text = Html.fromHtml(getString(R.string.you_are_logging_in_using, credentialColor), Html.FROM_HTML_MODE_LEGACY)
-        else
-            @Suppress("DEPRECATION")
-            tvLoggingMessage.text = Html.fromHtml(getString(R.string.you_are_logging_in_using, credentialColor))
 
     }
 
     private fun setObservers() {
-        iv_back.setOnClickListener{
-            finish()
-        }
-        btnNext.setOnClickListener {
-            if (isValidName(etName.text.toString().trim())) {
-                tvErrorName.hide()
-                viewModel.name = etName.text.toString().trim()
-
-                if (isEmailValid(etEmail.text.toString().trim())) {
-                    tvErrorEmail.hide()
-                    viewModel.email = etEmail.text.toString().trim()
-                    tvErrorName.hide()
-                    tvErrorEmail.hide()
-                    viewModel.registerUser()
-                } else {
-                    tvErrorEmail.show()
-                    tvErrorEmail.text = "*Please enter a valid Email ID"
-                }
-            } else {
-                tvErrorName.show()
-                tvErrorName.text = "*Please Enter a valid Name"
-            }
-        }
         viewModel.registerUserResponse.observe(this) {
             it?.let { resource ->
                 when (resource.status) {

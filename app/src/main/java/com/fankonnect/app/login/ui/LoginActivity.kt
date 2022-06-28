@@ -62,6 +62,9 @@ class LoginActivity : AppCompatActivity() {
                 viewModel.getOtpWithMobile((etMobile.text.toString()))
             }
         }
+        otpView.setOtpCompletionListener{
+            Toast.makeText(this, "$it is the OTP!!", Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun isMobileValid() =
