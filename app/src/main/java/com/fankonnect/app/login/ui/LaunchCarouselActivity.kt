@@ -53,7 +53,7 @@ class LaunchCarouselActivity : AppCompatActivity() {
 
     private fun getViewPagerPages() = flow {
         repeat(3) {
-            delay(2000)
+            delay(1500)
             emit(it)
         }
     }.flowOn(Dispatchers.Default)
