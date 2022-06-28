@@ -26,6 +26,7 @@ import com.fankonnect.app.login.viewmodel.LoginViewModel
 import com.fankonnect.app.network.RetrofitBuilder
 import com.fankonnect.app.util.*
 import kotlinx.android.synthetic.main.activity_login.*
+import kotlinx.android.synthetic.main.app_progress_bar.*
 
 class LoginActivity : AppCompatActivity() {
     lateinit var viewModel: LoginViewModel
@@ -175,12 +176,12 @@ class LoginActivity : AppCompatActivity() {
             it?.let { resource ->
                 when (resource.status) {
                     Status.SUCCESS -> {
+                        progressBar.hide()
                         handleSuccess(resource.data)
                         Toast.makeText(this, it.message ?: "OTP Sent Successfully", Toast.LENGTH_SHORT).show()
-//                        if(viewModel.isOtpPageShowing) viewModel.showSendAgainProgress.value = false
                     }
                     Status.ERROR -> {
-//                        if(viewModel.isOtpPageShowing) viewModel.showSendAgainProgress.value = false
+                        progressBar.hide()
                         Toast.makeText(
                             this,
                             it.message ?: "Some Error Occurred!",
@@ -188,7 +189,7 @@ class LoginActivity : AppCompatActivity() {
                         ).show()
                     }
                     Status.LOADING -> {
-//                        if(viewModel.isOtpPageShowing) viewModel.showSendAgainProgress.value = true
+                        progressBar.show()
                     }
                 }
             }
@@ -197,6 +198,7 @@ class LoginActivity : AppCompatActivity() {
             it?.let { resource ->
                 when (resource.status) {
                     Status.SUCCESS -> {
+                        progressBar.hide()
                         if (resource.data?.data?.exists == 1) {
                             SharedPreferenceHelper.saveToken(
                                 this,
@@ -222,9 +224,11 @@ class LoginActivity : AppCompatActivity() {
 
                     }
                     Status.ERROR -> {
+                        progressBar.hide()
                         Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
                     }
                     Status.LOADING -> {
+                        progressBar.show()
                     }
                 }
             }

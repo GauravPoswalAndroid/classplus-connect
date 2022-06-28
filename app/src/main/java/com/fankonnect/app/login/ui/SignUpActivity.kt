@@ -24,6 +24,7 @@ import com.fankonnect.app.util.Status
 import com.fankonnect.app.util.hide
 import com.fankonnect.app.util.show
 import kotlinx.android.synthetic.main.activity_signup.*
+import kotlinx.android.synthetic.main.app_progress_bar.*
 
 class SignUpActivity : AppCompatActivity() {
     private lateinit var viewModel: SignUpViewModel

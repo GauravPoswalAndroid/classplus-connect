@@ -21,7 +21,10 @@ import com.fankonnect.app.login.data.repository.LaunchCarouselRepository
 import com.fankonnect.app.login.viewmodel.LaunchCarouselViewModel
 import com.fankonnect.app.network.RetrofitBuilder
 import com.fankonnect.app.util.Status
+import com.fankonnect.app.util.hide
+import com.fankonnect.app.util.show
 import kotlinx.android.synthetic.main.activity_launch_carousel.*
+import kotlinx.android.synthetic.main.app_progress_bar.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.delay
@@ -58,9 +61,11 @@ class LaunchCarouselActivity : AppCompatActivity() {
             it?.let { resource ->
                 when (resource.status) {
                     Status.SUCCESS -> {
+                        progressBar.hide()
                         handleSuccess(resource.data)
                     }
                     Status.ERROR -> {
+                        progressBar.hide()
                         Toast.makeText(
                             this,
                             it.message ?: "Some Error Occurred!",
@@ -68,6 +73,7 @@ class LaunchCarouselActivity : AppCompatActivity() {
                         ).show()
                     }
                     Status.LOADING -> {
+                        progressBar.show()
                     }
                 }
             }
