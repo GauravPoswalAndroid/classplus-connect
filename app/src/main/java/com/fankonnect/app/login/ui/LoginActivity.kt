@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.text.*
 import android.text.Annotation
 import android.text.method.LinkMovementMethod
@@ -27,10 +28,27 @@ import com.fankonnect.app.network.RetrofitBuilder
 import com.fankonnect.app.util.*
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.app_progress_bar.*
+import java.text.DecimalFormat
+import java.text.NumberFormat
 
 class LoginActivity : AppCompatActivity() {
     lateinit var viewModel: LoginViewModel
     private var currentLoginState: LoginState = LoginState.MobileState()
+    private val countDownTimer = object : CountDownTimer(30000, 1000) {
+        override fun onTick(millisUntilFinished: Long) {
+            val f: NumberFormat = DecimalFormat("00")
+            val min = millisUntilFinished / 60000 % 60
+            val sec = millisUntilFinished / 1000 % 60
+            "${f.format(min)}:${f.format(sec)}".also { tvOtpTimer.text = it }
+        }
+
+        override fun onFinish() {
+            tvSendOtpAgain.show()
+            tvOtpTimerLabel.hide()
+            tvOtpTimer.hide()
+            tvOtpTimer.text = getString(R.string.otp_timer_text)
+        }
+    }
 
     companion object {
         private const val TAG = "LoginActivity"
@@ -78,6 +96,9 @@ class LoginActivity : AppCompatActivity() {
         otpView.setOtpCompletionListener {
             enableDisableButton(false)
             tvErrorOtp.hide()
+            if (currentLoginState is LoginState.OtpState && isOtpValid()) {
+                viewModel.verifyOtp((it))
+            }
         }
         otpView.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
@@ -90,6 +111,17 @@ class LoginActivity : AppCompatActivity() {
         tvEdit.setOnClickListener {
             updateLoginState(LoginState.MobileState())
         }
+        tvSendOtpAgain.setOnClickListener{
+            if (isMobileValid()) {
+                countDownTimer.onFinish()
+                viewModel.getOtpWithMobile((etMobile.text.toString()))
+            }
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        countDownTimer.cancel()
     }
 
     private fun isMobileValid() =
@@ -178,7 +210,6 @@ class LoginActivity : AppCompatActivity() {
                     Status.SUCCESS -> {
                         progressBar.hide()
                         handleSuccess(resource.data)
-                        Toast.makeText(this, it.message ?: "OTP Sent Successfully", Toast.LENGTH_SHORT).show()
                     }
                     Status.ERROR -> {
                         progressBar.hide()
@@ -241,6 +272,7 @@ class LoginActivity : AppCompatActivity() {
         data?.let {
             viewModel.sessionId = data.data.sessionId
             updateLoginState(LoginState.OtpState())
+            countDownTimer.start()
         }
     }
 
@@ -259,7 +291,9 @@ class LoginActivity : AppCompatActivity() {
                 tvEnterOtp.hide()
                 otpView.hide()
                 otpView.setText("")
+                tvOtpTimerLabel.hide()
                 tvOtpTimer.hide()
+                countDownTimer.cancel()
                 tvSendOtpAgain.hide()
                 tvLoginSignUp.text = getString(R.string.proceed)
                 enableDisableButton(false)
@@ -272,9 +306,12 @@ class LoginActivity : AppCompatActivity() {
                     theme
                 )
                 etMobile.isEnabled = false
+                tvSendOtpAgain.hide()
                 tvEdit.show()
                 tvEnterOtp.show()
+                otpView.setText("")
                 otpView.show()
+                tvOtpTimerLabel.show()
                 tvOtpTimer.show()
                 tvLoginSignUp.text = getString(R.string.verify)
                 enableDisableButton(true)

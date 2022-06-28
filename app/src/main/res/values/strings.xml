@@ -26,7 +26,8 @@
     <string name="formatter_string">Please enter the 4-digit verification code sent to you at &lt;b>%s&lt;/b</string>
     <string name="enter_otp_here">Enter OTP here</string>
     <string name="resend_code_in">Send OTP again</string>
-    <string name="waiting_for_otp">Waiting for OTP 00:30</string>
+    <string name="waiting_for_otp">Waiting for OTP </string>
+    <string name="otp_timer_text">00:30</string>
     <string name="retry_via_call">Retry via call</string>
     <string name="send_otp_again">Send OTP again</string>
     <string name="name">Name*</string>
