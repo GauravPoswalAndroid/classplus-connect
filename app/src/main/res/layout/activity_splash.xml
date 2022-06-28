@@ -10,28 +10,24 @@
 
     <ImageView
         android:id="@+id/splashAnim"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
         android:layout_marginTop="20dp"
-        android:src="@drawable/splash_middle_ground"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.30"
         app:layout_constraintBottom_toBottomOf="parent"
         tools:ignore="ContentDescription" />
 
     <ImageView
         android:id="@+id/splashLogo"
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="180dp"
-        android:layout_marginTop="20dp"
         android:src="@drawable/ic_connect_banner_v3"
         app:layout_constraintBottom_toBottomOf="@id/splashAnim"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/splashAnim"
+        app:layout_constraintStart_toStartOf="@id/splashAnim"
         app:layout_constraintTop_toTopOf="@id/splashAnim"
-        app:layout_constraintVertical_bias="0.403"
         tools:ignore="ContentDescription" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,18 +5,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.bumptech.glide.Glide
 import com.fankonnect.app.R
 import kotlinx.android.synthetic.main.fragment_launch_carousel.*
 
 class LaunchCarouselFragment : Fragment() {
-    private var carouselImage: Int? = null
     private var carouselText: String? = null
+    private var carouselImage: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            carouselImage = it.getInt(CAROUSEL_IMAGE_PATH)
             carouselText = it.getString(CAROUSEL_TEXT)
+            carouselImage = it.getString(CAROUSEL_IMAGE)
         }
     }
 
@@ -34,7 +35,7 @@ class LaunchCarouselFragment : Fragment() {
 
     private fun setCarouselData() {
         carouselImage?.let {
-            ivCarouselImage.setImageResource(it)
+            Glide.with(requireContext()).load(it).into(ivCarouselImage)
         }
         carouselText?.let {
             tvCarouselText.text = it
@@ -42,15 +43,15 @@ class LaunchCarouselFragment : Fragment() {
     }
 
     companion object {
-        private const val CAROUSEL_IMAGE_PATH = "CAROUSEL_IMAGE_PATH"
         private const val CAROUSEL_TEXT = "CAROUSEL_TEXT"
+        private const val CAROUSEL_IMAGE = "CAROUSEL_IMAGE"
 
         @JvmStatic
-        fun newInstance(imageSrc: Int, text: String) =
+        fun newInstance(text: String?, carouselImage: String?) =
             LaunchCarouselFragment().apply {
                 arguments = Bundle().apply {
-                    putInt(CAROUSEL_IMAGE_PATH, imageSrc)
                     putString(CAROUSEL_TEXT, text)
+                    putString(CAROUSEL_IMAGE, carouselImage)
                 }
             }
     }
