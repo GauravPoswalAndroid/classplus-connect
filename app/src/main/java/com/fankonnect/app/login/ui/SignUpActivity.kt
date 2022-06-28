@@ -2,14 +2,15 @@ package com.fankonnect.app.login.ui
 
 import android.content.Context
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
-import android.text.Html
+import android.text.Editable
 import android.text.TextUtils
+import android.text.TextWatcher
 import android.util.Patterns
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.res.ResourcesCompat
 import androidx.lifecycle.ViewModelProvider
 import com.fankonnect.app.R
 import com.fankonnect.app.base.ViewModelFactory
@@ -22,9 +23,7 @@ import com.fankonnect.app.util.SharedPreferenceHelper
 import com.fankonnect.app.util.Status
 import com.fankonnect.app.util.hide
 import com.fankonnect.app.util.show
-import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_signup.*
-import kotlinx.android.synthetic.main.activity_signup.toolbar
 
 class SignUpActivity : AppCompatActivity() {
     private lateinit var viewModel: SignUpViewModel
@@ -54,7 +53,52 @@ class SignUpActivity : AppCompatActivity() {
         setContentView(R.layout.activity_signup)
         initProperties()
         setObservers()
+        setUpViews()
         setUpToolbar()
+    }
+
+    private fun setUpViews() {
+        tvSignUp.setOnClickListener {
+            if (isValidName(etName.text.toString().trim())) {
+                tvErrorName.hide()
+                viewModel.name = etName.text.toString().trim()
+
+                if (isEmailValid(etEmail.text.toString().trim())) {
+                    tvErrorEmail.hide()
+                    viewModel.email = etEmail.text.toString().trim()
+                    tvErrorName.hide()
+                    tvErrorEmail.hide()
+                    viewModel.registerUser()
+                } else {
+                    tvErrorEmail.show()
+                    tvErrorEmail.text = "*Please enter a valid Email ID"
+                }
+            } else {
+                tvErrorName.show()
+                tvErrorName.text = "*Please Enter a valid Name"
+            }
+        }
+        val textWatcher = object : TextWatcher {
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                if (etName.text.toString().isEmpty() || etEmail.text.toString().isEmpty()) {
+                    tvSignUp.background = ResourcesCompat.getDrawable(
+                        resources,
+                        R.drawable.bg_round_corners_primary_light,
+                        theme
+                    )
+                } else tvSignUp.background = ResourcesCompat.getDrawable(
+                    resources,
+                    R.drawable.bg_button_click_color_primary,
+                    theme
+                )
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun afterTextChanged(s: Editable?) {}
+
+        }
+        etName.addTextChangedListener(textWatcher)
+        etEmail.addTextChangedListener(textWatcher)
     }
 
     private fun setUpToolbar() {
@@ -81,10 +125,6 @@ class SignUpActivity : AppCompatActivity() {
         viewModel.userMobile = intent.getStringExtra(MOBILE) ?: ""
         viewModel.otp = intent.getStringExtra(OTP) ?: ""
         viewModel.sessionId = intent.getStringExtra(SESSION_ID) ?: ""
-
-        val mobileNo = "+91-${viewModel.userMobile}"
-        val credentialColor = "<font color='#000000'>$mobileNo</font>"
-
     }
 
     private fun setObservers() {
