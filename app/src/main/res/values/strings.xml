@@ -36,5 +36,8 @@
     <string name="error_loading">Error Loading</string>
     <string name="login_signup">Login / Signup</string>
     <string name="carousel_image">Carousel Image</string>
+    <string name="carousel_text1">Create Paid Links to Monetize your Knowledge</string>
+    <string name="carousel_text2">Share with your Fans using different Channels</string>
+    <string name="carousel_text3">Earn instantly without any Hassle</string>
 
 </resources>
