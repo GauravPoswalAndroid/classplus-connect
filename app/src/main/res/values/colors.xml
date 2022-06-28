@@ -11,6 +11,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="colorText">#AA000000</color>
+        <color name="textColor">#3C4852</color>
     <color name="divider">#BDBDBD</color>
     <color name="gray_deep_dark">#333333</color>
     <color name="color_FF4058">#FF4058</color>

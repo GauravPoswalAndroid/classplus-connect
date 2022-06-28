@@ -4,30 +4,147 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_splash"
-    tools:context=".login.ui.SplashActivity">
+    android:background="@color/white"
+    tools:context=".login.ui.LoginActivity">
 
-    <ImageView
-        android:id="@+id/splashAnim"
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="90dp"
-        android:layout_marginTop="20dp"
-        android:src="@drawable/ic_connect_banner_v3"
+        android:layout_height="?attr/actionBarSize"
+        app:layout_collapseMode="pin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.25"
-        app:layout_constraintBottom_toBottomOf="parent"
-        tools:ignore="ContentDescription" />
+        app:layout_constraintTop_toTopOf="parent" />
 
-
-    <com.fankonnect.app.login.ui.NonSwipableViewPager
-        android:id="@+id/loginViewPager"
-        android:layout_width="0dp"
-        android:layout_height="310dp"
-        android:background="@drawable/shape_rectangle_filled_white_r10_tr_tl"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar">
+
+        <TextView
+            android:id="@+id/tvEnterMobile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:lineSpacingExtra="4sp"
+            android:text="@string/enter_your_mobile_number"
+            android:textColor="@color/textColor"
+            android:textSize="14sp"
+            android:padding="2dp"
+            android:layout_margin="24dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/llEnterNo"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/shape_rectangle_filled_white_outline_gray_r6"
+            android:orientation="horizontal"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginRight="24dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvEnterMobile">
+
+            <TextView
+                android:id="@+id/tvCcInitial"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="@string/india_code"
+                android:textColor="@color/gray_deep_dark"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <View
+                android:id="@+id/divider"
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="10dp"
+                android:background="@color/divider" />
+
+            <EditText
+                android:id="@+id/etMobile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="10dp"
+                android:background="@null"
+                android:gravity="center|start"
+                android:hint="@string/label_mobile_number_hint"
+                android:inputType="number"
+                android:maxLength="10"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:autofillHints="phone" />
+
+        </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvErrorMobile"
+            style="@style/error_text_view"
+            tools:visibility="visible"
+            android:visibility="gone"
+            android:text="@string/mobile_error_msg"
+            app:layout_constraintStart_toStartOf="@id/llEnterNo"
+            app:layout_constraintTop_toBottomOf="@id/llEnterNo"
+            tools:text="*Please enter valid Mobile Number" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cvFooter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:elevation="16dp"
+            android:background="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/tvTermsConditions"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginEnd="24dp"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/str_terms_and_conditions_new"
+                    android:textAlignment="center"
+                    android:textSize="12sp"
+                    android:visibility="visible"/>
+
+                <TextView
+                    android:id="@+id/tvLoginSignUp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/proceed"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:gravity="center"
+                    android:padding="14dp"
+                    android:layout_marginLeft="18dp"
+                    android:layout_marginRight="18dp"
+                    android:layout_marginBottom="18dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/bg_round_corners_primary_light"/>
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
