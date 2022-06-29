@@ -68,6 +68,7 @@ class LoginActivity : AppCompatActivity() {
         setUpToolbar()
         setTermsConditionsText()
         setUpViews()
+        updateLoginState(LoginState.MobileState())
     }
 
     private fun setUpViews() {
@@ -251,6 +252,7 @@ class LoginActivity : AppCompatActivity() {
                                 viewModel.otp,
                                 viewModel.sessionId
                             )
+                            updateLoginState(LoginState.MobileState())
                         }
 
                     }
@@ -293,6 +295,7 @@ class LoginActivity : AppCompatActivity() {
                 otpView.setText("")
                 tvOtpTimerLabel.hide()
                 tvOtpTimer.hide()
+                etMobile.requestFocus()
                 countDownTimer.cancel()
                 tvSendOtpAgain.hide()
                 tvLoginSignUp.text = getString(R.string.proceed)

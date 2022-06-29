@@ -23,6 +23,6 @@ class SplashActivity : AppCompatActivity() {
             else
                 LaunchCarouselActivity.startActivity(this)
             finish()
-        }, 3000)
+        }, 2000)
     }
 }
