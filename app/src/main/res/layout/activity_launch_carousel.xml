@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:background="@drawable/shape_rectangle_filled_white_r10_tr_tl"
-        app:layout_constraintBottom_toTopOf="@id/viewSeparator"
+        app:layout_constraintBottom_toTopOf="@id/tabLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
@@ -33,10 +33,10 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@color/grayE5"
+        android:layout_marginBottom="18dp"
         app:layout_constraintBottom_toTopOf="@+id/tvLoginSignUp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/carouselViewPager" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/tvLoginSignUp"
@@ -44,6 +44,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         android:text="@string/login_signup"
         android:textColor="@color/colorPrimary"
         android:textStyle="bold"
@@ -51,9 +52,7 @@
         android:gravity="center"
         android:padding="16dp"
         android:layout_margin="18dp"
-        android:background="@drawable/bg_round_corners_border"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/viewSeparator" />
+        android:background="@drawable/bg_round_corners_border" />
 
     <include layout="@layout/app_progress_bar" />
 
