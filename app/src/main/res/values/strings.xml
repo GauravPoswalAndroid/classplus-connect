@@ -43,5 +43,7 @@
     <string name="carousel_image">Carousel Image</string>
     <string name="mobile_error_msg">*Please enter valid Mobile number</string>
     <string name="otp_error_msg">*Please enter valid OTP number</string>
+    <string name="email_validation_err_msg">*Please enter a valid Email ID</string>
+    <string name="name_validation_err_msg">*Please enter a valid Name</string>
 
 </resources>

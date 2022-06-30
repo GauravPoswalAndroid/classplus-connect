@@ -72,11 +72,11 @@ class SignUpActivity : AppCompatActivity() {
                     viewModel.registerUser()
                 } else {
                     tvErrorEmail.show()
-                    tvErrorEmail.text = "*Please enter a valid Email ID"
+                    tvErrorEmail.text = getString(R.string.email_validation_err_msg)
                 }
             } else {
                 tvErrorName.show()
-                tvErrorName.text = "*Please Enter a valid Name"
+                tvErrorName.text = getString(R.string.name_validation_err_msg)
             }
         }
         val textWatcher = object : TextWatcher {
